@@ -17,7 +17,7 @@ public class RegularUtil {
     }
 
     public static List<String> get(String s, String regex) {
-        List<String> result = new ArrayList();
+        List<String> result = new ArrayList<String>();
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(s);
         while(matcher.find()) {
