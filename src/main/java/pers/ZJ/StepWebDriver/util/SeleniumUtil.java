@@ -16,7 +16,7 @@ public class SeleniumUtil {
     public static ChromeDriver getChromeDriver(File webDriverFile){
         System.setProperty("webdriver.chrome.driver",webDriverFile.getPath());
         ChromeOptions chromeOptions=new ChromeOptions();
-//        chromeOptions.addArguments("headless");
+        chromeOptions.addArguments("headless");
         chromeOptions.addArguments("start-maximized");
         ChromeDriver webDriver=new ChromeDriver(chromeOptions);
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
