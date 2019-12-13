@@ -13,10 +13,10 @@ public class Test {
 
     @org.junit.Test
     public void testExecute(){
-        StepWebDriver stepWebDriver = new StepWebDriver(new File("E:\\ZJ\\chromedriver\\79\\chromedriver.exe"));
-        stepWebDriver.execute("url(\"http://192.168.125.67:8080/kesida_sys/home/netHomeDataInit\")");
-        stepWebDriver.execute("$(\"input[id=userAccount]\").sendKey(?)","test");
-        stepWebDriver.close();
+//        StepWebDriver stepWebDriver = new StepWebDriver(new File("E:\\ZJ\\chromedriver\\79\\chromedriver.exe"));
+//        stepWebDriver.execute("url(\"http://192.168.125.67:8080/kesida_sys/home/netHomeDataInit\")");
+//        stepWebDriver.execute("$(\"input[id=userAccount]\").sendKey(?)","test");
+//        stepWebDriver.close();
     }
 
 }
