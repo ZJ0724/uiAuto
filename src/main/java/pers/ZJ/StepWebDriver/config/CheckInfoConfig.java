@@ -21,6 +21,6 @@ public class CheckInfoConfig {
      * */
     public static final String ELEMENT_ACTION = "^\\$(\\(\"(.*?)\"\\))((\\[[1-9][0-9]*\\])?)" +
             "(((.parent\\(\\))|(.children\\(\\))(\\[[1-9][0-9]*\\])?|(.next\\(\\))|(.prev\\(\\)))*)" +
-            "((.click\\(\\))|(.sendKey\\(\"(.*?)\"\\))|(.clear\\(\\))|(.display\\(([1-9][0-9]*)?\\)))$";
+            "((.click\\(\\))|(.sendKey\\(\"(.*?)\"\\))|(.sendKey\\(\\?\\))|(.clear\\(\\))|(.display\\(([1-9][0-9]*)?\\)))$";
 
 }

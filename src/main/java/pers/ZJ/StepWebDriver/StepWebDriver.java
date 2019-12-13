@@ -171,6 +171,10 @@ public class StepWebDriver {
 
         //sendKey()
         if (actionType.equals("sendK")) {
+            //占位符
+            if (action.substring(action.length()-3).equals("(?)")) {
+                throw new StepException(step+"未输入参数");
+            }
             String value = RegularUtil.get(action,"sendKey\\(\"(.*?)\"\\)").get(0);
             webElement.sendKeys(value);
             return;
@@ -187,6 +191,18 @@ public class StepWebDriver {
      * */
     public void close(){
         SeleniumUtil.closeWebDriver(webDriver);
+    }
+
+    /**
+     * 执行，通过占位符传参
+     * */
+    public void execute(String step, String value){
+        int length = step.length();
+        if (step.substring(length-10).equals("sendKey(?)")) {
+            step = step.substring(0,length-2) + "\"" + value + "\")";
+        }
+        System.out.println(step);
+        execute(step);
     }
 
 }
