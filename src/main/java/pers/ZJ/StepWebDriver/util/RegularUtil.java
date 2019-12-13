@@ -20,7 +20,7 @@ public class RegularUtil {
         List<String> result = new ArrayList<String>();
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(s);
-        while(matcher.find()) {
+        while (matcher.find()) {
             result.add(matcher.group(1));
         }
         return result;
