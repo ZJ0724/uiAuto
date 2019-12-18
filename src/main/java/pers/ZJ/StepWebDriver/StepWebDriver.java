@@ -20,10 +20,14 @@ public class StepWebDriver {
 
     private WebDriver webDriver;
 
-    public StepWebDriver(File webdriverFile){
+    public StepWebDriver(File webdriverFile) {
+        this(webdriverFile,false);
+    }
+
+    public StepWebDriver(File webdriverFile, boolean headless) {
         try {
-            webDriver = SeleniumUtil.getChromeDriver(webdriverFile);
-        }catch (org.openqa.selenium.WebDriverException e){
+            webDriver = SeleniumUtil.getChromeDriver(webdriverFile, headless);
+        }catch (org.openqa.selenium.WebDriverException e) {
             throw new WebDriverException("驱动异常");
         }
     }

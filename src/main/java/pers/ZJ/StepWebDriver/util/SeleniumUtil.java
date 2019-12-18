@@ -13,10 +13,12 @@ public class SeleniumUtil {
     /**
      * 获取谷歌驱动
      * */
-    public static ChromeDriver getChromeDriver(File webDriverFile){
+    public static ChromeDriver getChromeDriver(File webDriverFile, boolean headless) {
         System.setProperty("webdriver.chrome.driver",webDriverFile.getPath());
         ChromeOptions chromeOptions=new ChromeOptions();
-        chromeOptions.addArguments("headless");
+        if (!headless) {
+            chromeOptions.addArguments("headless");
+        }
         chromeOptions.addArguments("start-maximized");
         ChromeDriver webDriver=new ChromeDriver(chromeOptions);
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

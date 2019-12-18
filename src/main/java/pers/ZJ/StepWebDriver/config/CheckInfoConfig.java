@@ -8,7 +8,7 @@ public class CheckInfoConfig {
     /**
      * 浏览器操作
      */
-    public static final List<String> BROWSER_ACTIONS = new ArrayList<>();
+    public static final List<String> BROWSER_ACTIONS = new ArrayList<String>();
 
     static {
         BROWSER_ACTIONS.add("^wait\\([1-9][0-9]*\\)$");
