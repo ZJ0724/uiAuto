@@ -1,10 +1,10 @@
-package pers.ZJ.StepWebDriver.exception;
+package com.zj0724.StepWebDriver.exception;
 
-public class StepException extends RuntimeException{
+public class WebElementException extends RuntimeException {
 
     private String message;
 
-    public StepException(String message){
+    public WebElementException(String message){
         this.message = message;
     }
 

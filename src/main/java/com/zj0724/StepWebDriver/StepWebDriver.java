@@ -1,17 +1,18 @@
-package pers.ZJ.StepWebDriver;
+package com.zj0724.StepWebDriver;
 
+import com.zj0724.StepWebDriver.config.CheckInfoConfig;
+import com.zj0724.StepWebDriver.exception.WebElementException;
+import com.zj0724.StepWebDriver.util.RegularUtil;
+import com.zj0724.StepWebDriver.util.SeleniumUtil;
+import com.zj0724.StepWebDriver.util.StepUtil;
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import pers.ZJ.StepWebDriver.config.CheckInfoConfig;
-import pers.ZJ.StepWebDriver.exception.BugException;
-import pers.ZJ.StepWebDriver.exception.StepException;
-import pers.ZJ.StepWebDriver.exception.WebDriverException;
-import pers.ZJ.StepWebDriver.exception.WebElementException;
-import pers.ZJ.StepWebDriver.util.RegularUtil;
-import pers.ZJ.StepWebDriver.util.SeleniumUtil;
-import pers.ZJ.StepWebDriver.util.StepUtil;
+import com.zj0724.StepWebDriver.exception.BugException;
+import com.zj0724.StepWebDriver.exception.StepException;
+import com.zj0724.StepWebDriver.exception.WebDriverException;
+
 import java.io.File;
 import java.util.List;
 import java.util.Set;
