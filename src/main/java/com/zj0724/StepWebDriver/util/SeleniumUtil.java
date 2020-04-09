@@ -36,7 +36,7 @@ public class SeleniumUtil {
      * 关闭驱动
      * */
     public static void closeWebDriver(WebDriver webDriver){
-        if(webDriver!=null){
+        if (webDriver!=null) {
             webDriver.close();
             webDriver.quit();
         }
@@ -46,7 +46,7 @@ public class SeleniumUtil {
      * 打开网址
      * */
     public static void openUrl(WebDriver webDriver, String url){
-        if(url.equals("")){
+        if (url.equals("")) {
             return;
         }
         webDriver.get(url);
