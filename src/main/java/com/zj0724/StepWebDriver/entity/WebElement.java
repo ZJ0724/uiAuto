@@ -1,6 +1,7 @@
 package com.zj0724.StepWebDriver.entity;
 
-import org.openqa.selenium.By;
+import com.zj0724.StepWebDriver.exception.WebElementException;
+import org.openqa.selenium.*;
 
 public class WebElement {
 
@@ -8,32 +9,39 @@ public class WebElement {
 
     public WebElement(org.openqa.selenium.WebElement element) {
         this.element = element;
-        System.out.println(this.element);
     }
 
     /**
      * 点击元素
      * */
-    public boolean click() {
-        element.click();
-
-        return true;
+    public void click() {
+        try {
+            element.click();
+        } catch (ElementClickInterceptedException e) {
+            throw new WebElementException("元素不能被点击");
+        }
     }
 
     /**
      * 输入
      * */
-    public boolean sendKey(String value) {
-        this.element.sendKeys(value);
-
-        return true;
+    public void sendKey(String value) {
+        try {
+            this.element.sendKeys(value);
+        } catch (ElementNotInteractableException e) {
+            throw new WebElementException("元素不能输入内容");
+        }
     }
 
     /**
      * 获取父级元素
      * */
     public WebElement parent() {
-        return new WebElement(element.findElement(By.xpath("./..")));
+        try {
+            return new WebElement(element.findElement(By.xpath("./..")));
+        } catch (InvalidSelectorException e) {
+            return null;
+        }
     }
 
     /**
@@ -51,21 +59,38 @@ public class WebElement {
             return null;
         }
 
-        return new WebElement(this.element.findElement(By.xpath("./child::*[" + (index) + "]")));
+        try {
+            return new WebElement(this.element.findElement(By.xpath("./child::*[" + (index) + "]")));
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
     /**
      * 获取下一个元素
      * */
     public WebElement next() {
-        return new WebElement(this.element.findElement(By.xpath("./following-sibling::*[1]")));
+        try {
+            return new WebElement(this.element.findElement(By.xpath("./following-sibling::*[1]")));
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
     /**
      * 获取上一个元素
      * */
     public WebElement prev() {
-        return new WebElement(this.element.findElement(By.xpath("./preceding-sibling::*[1]")));
+        try {
+            return new WebElement(this.element.findElement(By.xpath("./preceding-sibling::*[1]")));
+        } catch (NoSuchElementException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return this.element.toString();
     }
 
 }

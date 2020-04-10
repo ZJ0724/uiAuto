@@ -7,13 +7,13 @@ public class Test {
     public static void main(String[] args) {
 
 
-        StepWebDriver stepWebDriver = new StepWebDriver("E:\\ZJ\\chromeDriver\\80\\chromedriver.exe", true);
+        StepWebDriver stepWebDriver = new StepWebDriver("E:/ZJ/MyProject/StepWebDriver/src/test/java/test.html", true);
 
-        stepWebDriver.url("http://192.168.125.67:8080/kesida_sys/home/netHomeDataInit");
+        stepWebDriver.url("file:///E:/ZJ/MyProject/StepWebDriver/src/test/java/test.html");
 
 
+        System.out.println(stepWebDriver.findElementByCssSelector("*[id='a']").prev());
 
-        stepWebDriver.findByCssSelector("a[onclick=\"login()\"]").click();
     }
 
 }
