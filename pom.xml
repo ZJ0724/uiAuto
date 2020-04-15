@@ -56,9 +56,10 @@
                 <version>2.2</version>
                 <configuration>
                     <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
+<!--                        <manifest>-->
+<!--                            <addClasspath>true</addClasspath>-->
+<!--                            <mainClass>com.zj0724.StepWebDriver.Test</mainClass>-->
+<!--                        </manifest>-->
                     </archive>
                     <outputDirectory>${buildPath}</outputDirectory>
                 </configuration>
