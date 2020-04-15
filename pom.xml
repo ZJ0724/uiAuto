@@ -70,6 +70,7 @@
                 <version>2.10</version>
                 <configuration>
                     <outputDirectory>${buildPath}/lib</outputDirectory>
+                    <excludeScope>provided</excludeScope>
                 </configuration>
                 <executions>
                     <execution>
