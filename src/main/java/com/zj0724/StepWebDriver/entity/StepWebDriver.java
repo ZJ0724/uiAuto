@@ -2,7 +2,6 @@ package com.zj0724.StepWebDriver.entity;
 
 import com.zj0724.StepWebDriver.exception.GrammarException;
 import com.zj0724.StepWebDriver.exception.UrlException;
-import org.apache.commons.exec.ExecuteException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -17,12 +16,24 @@ public class StepWebDriver {
 
     public StepWebDriver(String webDriverFilePath, boolean headless) {
         try {
-            System.setProperty("webdriver.chrome.driver", webDriverFilePath);
-            ChromeOptions chromeOptions=new ChromeOptions();
-            if (!headless) {
-                chromeOptions.addArguments("headless");
-            }
+            ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("start-maximized");
+
+            // 系统类型
+            String OsName = System.getProperty("os.name");
+            // windows
+            if (OsName.contains("Windows")) {
+                System.setProperty("webdriver.chrome.driver", webDriverFilePath);
+                if (!headless) {
+                    chromeOptions.addArguments("headless");
+                }
+            }
+            // linux
+            if (OsName.contains("Linux")) {
+                chromeOptions.addArguments("headless");
+                chromeOptions.addArguments("no-sandbox");
+            }
+
             ChromeDriver webDriver = new ChromeDriver(chromeOptions);
             webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             this.webDriver = webDriver;
@@ -115,6 +126,17 @@ public class StepWebDriver {
             this.webDriver.get(url);
         } catch (InvalidArgumentException e) {
             throw UrlException.getUrlException();
+        }
+    }
+
+    /**
+     * 关闭驱动
+     * */
+    public void close() {
+        if (this.webDriver != null) {
+//            this.webDriver.quit();
+            this.webDriver.close();
+            this.webDriver.quit();
         }
     }
 
