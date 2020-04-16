@@ -2,6 +2,8 @@ package com.zj0724.StepWebDriver.entity;
 
 import com.zj0724.StepWebDriver.exception.GrammarException;
 import com.zj0724.StepWebDriver.exception.UrlException;
+import com.zj0724.StepWebDriver.exception.WaitException;
+import com.zj0724.StepWebDriver.exception.WebElementException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -83,7 +85,7 @@ public class StepWebDriver {
         } catch (InvalidSelectorException e) {
             throw GrammarException.cssGrammarException();
         } catch (NoSuchElementException e) {
-            return null;
+            throw new WebElementException("元素未找到");
         }
     }
 
@@ -96,7 +98,7 @@ public class StepWebDriver {
         } catch (InvalidSelectorException e) {
             throw GrammarException.xpathGrammarException();
         } catch (NoSuchElementException e) {
-            return null;
+            throw new WebElementException("元素未找到");
         }
     }
 
@@ -114,7 +116,18 @@ public class StepWebDriver {
         } catch (InvalidSelectorException e) {
             throw GrammarException.xpathGrammarException();
         } catch (NoSuchElementException e) {
-            return null;
+            throw new WebElementException("元素未找到");
+        }
+    }
+
+    /**
+     * 等待
+     * */
+    public void await(int Millisecond) {
+        try {
+            Thread.sleep(Millisecond);
+        } catch (InterruptedException e) {
+            throw new WaitException(e.getMessage());
         }
     }
 
