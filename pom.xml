@@ -8,7 +8,7 @@
     <!--项目信息-->
     <groupId>com.zj0724</groupId>
     <artifactId>StepWebDriver</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <packaging>jar</packaging>
 
     <properties>

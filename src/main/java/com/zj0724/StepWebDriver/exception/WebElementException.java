@@ -17,4 +17,11 @@ public class WebElementException extends RuntimeException {
         return message;
     }
 
+    /**
+     * 元素未找到
+     * */
+    public static WebElementException elementNoFind() {
+        return new WebElementException("元素未找到");
+    }
+
 }

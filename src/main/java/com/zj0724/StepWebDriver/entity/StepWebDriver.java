@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class StepWebDriver {
 
-    private WebDriver webDriver = null;
+    private final WebDriver webDriver;
 
     public StepWebDriver(String webDriverFilePath, boolean headless) {
         try {
@@ -67,7 +67,7 @@ public class StepWebDriver {
         } catch (InvalidSelectorException e) {
             throw GrammarException.cssGrammarException();
         } catch (NoSuchElementException e) {
-            return null;
+            throw WebElementException.elementNoFind();
         }
     }
 
