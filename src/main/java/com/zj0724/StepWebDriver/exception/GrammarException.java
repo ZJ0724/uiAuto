@@ -20,4 +20,11 @@ public class GrammarException extends RuntimeException {
         return new GrammarException("xpath语法错误");
     }
 
+    /**
+     * 网址错误
+     * */
+    public static GrammarException urlError() {
+        return new GrammarException("网址错误");
+    }
+
 }

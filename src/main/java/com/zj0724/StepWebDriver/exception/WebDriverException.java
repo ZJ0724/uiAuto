@@ -6,4 +6,11 @@ public class WebDriverException extends RuntimeException {
         super(message);
     }
 
+    /**
+     * 驱动文件错误
+     * */
+    public static WebDriverException driverFileError() {
+        return new WebDriverException("驱动文件错误");
+    }
+
 }

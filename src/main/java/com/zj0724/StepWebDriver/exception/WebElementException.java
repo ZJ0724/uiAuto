@@ -2,25 +2,14 @@ package com.zj0724.StepWebDriver.exception;
 
 public class WebElementException extends RuntimeException {
 
-    private String message;
-
     public WebElementException(String message){
-        this.message = message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
+        super(message);
     }
 
     /**
      * 元素未找到
      * */
-    public static WebElementException elementNoFind() {
+    public static WebElementException elementNotFind() {
         return new WebElementException("元素未找到");
     }
 
