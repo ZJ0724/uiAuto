@@ -1,37 +1,21 @@
 package com.zj0724.StepWebDriver.common;
 
 import com.zj0724.StepWebDriver.StepWebDriver;
-import com.zj0724.StepWebDriver.proxy.AnnotationCheckProxy;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ChromeStepWebDriver implements StepWebDriver {
 
-    private WebDriver webDriver;
-
-    /**
-     * 获取一个谷歌驱动
-     * */
-    public static StepWebDriver getChromeStepWebDriver(File webDriverFile, boolean headless) {
-        return (StepWebDriver) AnnotationCheckProxy.getProxyObject(new ChromeStepWebDriver(webDriverFile, headless));
-    }
-    public static StepWebDriver getChromeStepWebDriver(String chromeDriverPath) {
-        return getChromeStepWebDriver(new File(chromeDriverPath), false);
-    }
-    public static StepWebDriver getChromeStepWebDriver(String webDriverFilePath, boolean headless) {
-        return getChromeStepWebDriver(new File(webDriverFilePath), false);
-    }
-    public static StepWebDriver getChromeStepWebDriver(File webDriverFile) {
-        return getChromeStepWebDriver(webDriverFile, false);
-    }
+    private final BaseStepWebDriver baseStepWebDriver;
 
     /**
      * 构造方法
      * */
-    private ChromeStepWebDriver(String webDriverFilePath, boolean headless) {
+    public ChromeStepWebDriver(String webDriverFilePath, boolean headless) {
         try {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("start-maximized");
@@ -53,20 +37,57 @@ public class ChromeStepWebDriver implements StepWebDriver {
 
             ChromeDriver webDriver = new ChromeDriver(chromeOptions);
             webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            this.webDriver = webDriver;
+            this.baseStepWebDriver = new BaseStepWebDriver(webDriver);
         } catch (IllegalStateException | WebDriverException e) {
             throw com.zj0724.StepWebDriver.exception.WebDriverException.driverFileError();
         }
     }
-    private ChromeStepWebDriver(File webDriverFile, boolean headless) {
+
+    public ChromeStepWebDriver(File webDriverFile, boolean headless) {
         this(webDriverFile.getAbsolutePath(), false);
     }
-    private ChromeStepWebDriver(String webDriverFilePath) {
+
+    public ChromeStepWebDriver(String webDriverFilePath) {
         this(webDriverFilePath, false);
     }
-    private ChromeStepWebDriver(File webDriverFile) {
+
+    public ChromeStepWebDriver(File webDriverFile) {
         this(webDriverFile.getAbsolutePath(), false);
     }
-    private ChromeStepWebDriver() {}
+
+    @Override
+    public WebElement findElementByCssSelector(String cssSelector) {
+        return this.baseStepWebDriver.findElementByCssSelector(cssSelector);
+    }
+
+    @Override
+    public List<WebElement> findElementsByCssSelector(String cssSelector) {
+        return this.baseStepWebDriver.findElementsByCssSelector(cssSelector);
+    }
+
+    @Override
+    public WebElement findElementByXpath(String xpath) {
+        return this.baseStepWebDriver.findElementByXpath(xpath);
+    }
+
+    @Override
+    public List<WebElement> findElementsByXpath(String xpath) {
+        return this.baseStepWebDriver.findElementsByXpath(xpath);
+    }
+
+    @Override
+    public void await(int Millisecond) {
+        this.baseStepWebDriver.await(Millisecond);
+    }
+
+    @Override
+    public void url(String url) {
+        this.baseStepWebDriver.url(url);
+    }
+
+    @Override
+    public void close() {
+        this.baseStepWebDriver.close();
+    }
 
 }

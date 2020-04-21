@@ -1,7 +1,6 @@
 package com.zj0724.StepWebDriver.common;
 
 import com.zj0724.StepWebDriver.StepWebDriver;
-import com.zj0724.StepWebDriver.entity.WebElement;
 import com.zj0724.StepWebDriver.exception.ErrorException;
 import com.zj0724.StepWebDriver.exception.GrammarException;
 import com.zj0724.StepWebDriver.exception.WebElementException;
@@ -13,7 +12,7 @@ public class BaseStepWebDriver implements StepWebDriver {
 
     private final WebDriver webDriver;
 
-    public BaseStepWebDriver(WebDriver webDriver) {
+    protected BaseStepWebDriver(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 

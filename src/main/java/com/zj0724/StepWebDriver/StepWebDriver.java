@@ -1,6 +1,6 @@
 package com.zj0724.StepWebDriver;
 
-import com.zj0724.StepWebDriver.entity.WebElement;
+import com.zj0724.StepWebDriver.common.WebElement;
 import java.util.List;
 
 public interface StepWebDriver {
