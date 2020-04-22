@@ -1,24 +1,24 @@
-package com.zj0724.StepWebDriver.common;
+package com.zj0724.uiAuto.webDriver;
 
-import com.zj0724.StepWebDriver.StepWebDriver;
-import com.zj0724.StepWebDriver.exception.ErrorException;
-import com.zj0724.StepWebDriver.exception.GrammarException;
-import com.zj0724.StepWebDriver.exception.WebElementException;
+import com.zj0724.uiAuto.WebDriver;
+import com.zj0724.uiAuto.exception.ErrorException;
+import com.zj0724.uiAuto.exception.GrammarException;
+import com.zj0724.uiAuto.exception.WebElementException;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseStepWebDriver implements StepWebDriver {
+public class BaseWebDriver implements WebDriver {
 
-    private final WebDriver webDriver;
+    private final org.openqa.selenium.WebDriver webDriver;
 
-    protected BaseStepWebDriver(WebDriver webDriver) {
+    protected BaseWebDriver(org.openqa.selenium.WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
-    public WebElement findElementByCssSelector(String cssSelector) {
+    public com.zj0724.uiAuto.WebElement findElementByCssSelector(String cssSelector) {
         try {
-            return new WebElement(webDriver.findElement(By.cssSelector(cssSelector)));
+            return new com.zj0724.uiAuto.WebElement(webDriver.findElement(By.cssSelector(cssSelector)));
         } catch (InvalidSelectorException e) {
             throw GrammarException.cssGrammarException();
         } catch (NoSuchElementException e) {
@@ -26,12 +26,12 @@ public class BaseStepWebDriver implements StepWebDriver {
         }
     }
 
-    public List<WebElement> findElementsByCssSelector(String cssSelector) {
+    public List<com.zj0724.uiAuto.WebElement> findElementsByCssSelector(String cssSelector) {
         try {
-            List<WebElement> result = new ArrayList<>();
+            List<com.zj0724.uiAuto.WebElement> result = new ArrayList<>();
             List<org.openqa.selenium.WebElement> elements = webDriver.findElements(By.cssSelector(cssSelector));
             for (org.openqa.selenium.WebElement element : elements) {
-                result.add(new WebElement(element));
+                result.add(new com.zj0724.uiAuto.WebElement(element));
             }
             return result;
         } catch (InvalidSelectorException e) {
@@ -41,9 +41,9 @@ public class BaseStepWebDriver implements StepWebDriver {
         }
     }
 
-    public WebElement findElementByXpath(String xpath) {
+    public com.zj0724.uiAuto.WebElement findElementByXpath(String xpath) {
         try {
-            return new WebElement(webDriver.findElement(By.xpath(xpath)));
+            return new com.zj0724.uiAuto.WebElement(webDriver.findElement(By.xpath(xpath)));
         } catch (InvalidSelectorException e) {
             throw GrammarException.xpathGrammarException();
         } catch (NoSuchElementException e) {
@@ -51,12 +51,12 @@ public class BaseStepWebDriver implements StepWebDriver {
         }
     }
 
-    public List<WebElement> findElementsByXpath(String xpath) {
+    public List<com.zj0724.uiAuto.WebElement> findElementsByXpath(String xpath) {
         try {
-            List<WebElement> result = new ArrayList<>();
+            List<com.zj0724.uiAuto.WebElement> result = new ArrayList<>();
             List<org.openqa.selenium.WebElement> elements = webDriver.findElements(By.xpath(xpath));
             for (org.openqa.selenium.WebElement element : elements) {
-                result.add(new WebElement(element));
+                result.add(new com.zj0724.uiAuto.WebElement(element));
             }
             return result;
         } catch (InvalidSelectorException e) {

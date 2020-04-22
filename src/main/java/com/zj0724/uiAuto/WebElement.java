@@ -1,13 +1,13 @@
-package com.zj0724.StepWebDriver.common;
+package com.zj0724.uiAuto;
 
-import com.zj0724.StepWebDriver.exception.WebElementException;
+import com.zj0724.uiAuto.exception.WebElementException;
 import org.openqa.selenium.*;
 
 public class WebElement {
 
     private org.openqa.selenium.WebElement element = null;
 
-    protected WebElement(org.openqa.selenium.WebElement element) {
+    public WebElement(org.openqa.selenium.WebElement element) {
         this.element = element;
     }
 

@@ -7,8 +7,8 @@
 
     <!--项目信息-->
     <groupId>com.zj0724</groupId>
-    <artifactId>StepWebDriver</artifactId>
-    <version>1.2.0</version>
+    <artifactId>uiAuto</artifactId>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -58,7 +58,7 @@
                     <archive>
 <!--                        <manifest>-->
 <!--                            <addClasspath>true</addClasspath>-->
-<!--                            <mainClass>com.zj0724.StepWebDriver.Test</mainClass>-->
+<!--                            <mainClass>com.zj0724.uiAuto.Test</mainClass>-->
 <!--                        </manifest>-->
                     </archive>
                     <outputDirectory>${buildPath}</outputDirectory>

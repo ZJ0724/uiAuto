@@ -1,9 +1,8 @@
-package com.zj0724.StepWebDriver;
+package com.zj0724.uiAuto;
 
-import com.zj0724.StepWebDriver.common.WebElement;
 import java.util.List;
 
-public interface StepWebDriver {
+public interface WebDriver {
 
     /**
      * 通过cssSelector查找元素

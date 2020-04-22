@@ -1,4 +1,4 @@
-package com.zj0724.StepWebDriver.exception;
+package com.zj0724.uiAuto.exception;
 
 public class WebElementException extends RuntimeException {
 

@@ -1,6 +1,7 @@
-package com.zj0724.StepWebDriver.common;
+package com.zj0724.uiAuto.webDriver;
 
-import com.zj0724.StepWebDriver.StepWebDriver;
+import com.zj0724.uiAuto.WebDriver;
+import com.zj0724.uiAuto.WebElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,14 +9,14 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class ChromeStepWebDriver implements StepWebDriver {
+public class ChromeWebDriver implements WebDriver {
 
-    private final BaseStepWebDriver baseStepWebDriver;
+    private final BaseWebDriver baseStepWebDriver;
 
     /**
      * 构造方法
      * */
-    public ChromeStepWebDriver(String webDriverFilePath, boolean headless) {
+    public ChromeWebDriver(String webDriverFilePath, boolean headless) {
         try {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("start-maximized");
@@ -37,21 +38,21 @@ public class ChromeStepWebDriver implements StepWebDriver {
 
             ChromeDriver webDriver = new ChromeDriver(chromeOptions);
             webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            this.baseStepWebDriver = new BaseStepWebDriver(webDriver);
+            this.baseStepWebDriver = new BaseWebDriver(webDriver);
         } catch (IllegalStateException | WebDriverException e) {
-            throw com.zj0724.StepWebDriver.exception.WebDriverException.driverFileError();
+            throw com.zj0724.uiAuto.exception.WebDriverException.driverFileError();
         }
     }
 
-    public ChromeStepWebDriver(File webDriverFile, boolean headless) {
+    public ChromeWebDriver(File webDriverFile, boolean headless) {
         this(webDriverFile.getAbsolutePath(), false);
     }
 
-    public ChromeStepWebDriver(String webDriverFilePath) {
+    public ChromeWebDriver(String webDriverFilePath) {
         this(webDriverFilePath, false);
     }
 
-    public ChromeStepWebDriver(File webDriverFile) {
+    public ChromeWebDriver(File webDriverFile) {
         this(webDriverFile.getAbsolutePath(), false);
     }
 
