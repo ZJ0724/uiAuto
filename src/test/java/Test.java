@@ -13,15 +13,13 @@ public class Test {
 
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.addArguments("--start-maximized");
-//        firefoxOptions.addArguments("-headless");
+//        firefoxOptions.addArguments("--headless");
 
         WebDriver webDriver = new FirefoxDriver(firefoxOptions);
 
         webDriver.get("https://www.baidu.com/");
 
 //        webDriver.quit();
-
-        WebElement webElement = new RemoteWebElement();
     }
 
 }

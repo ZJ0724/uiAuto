@@ -7,13 +7,18 @@ import com.zj0724.uiAuto.exception.WebElementException;
 import org.openqa.selenium.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class BaseWebDriver implements WebDriver {
 
-    private final org.openqa.selenium.WebDriver webDriver;
+    private org.openqa.selenium.WebDriver webDriver;
 
-    protected BaseWebDriver(org.openqa.selenium.WebDriver webDriver) {
+    protected BaseWebDriver() {}
+
+    protected void setWebDriver(org.openqa.selenium.WebDriver webDriver) {
         this.webDriver = webDriver;
+        this.webDriver.manage().window().maximize();
+        this.webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public com.zj0724.uiAuto.WebElement findElementByCssSelector(String cssSelector) {

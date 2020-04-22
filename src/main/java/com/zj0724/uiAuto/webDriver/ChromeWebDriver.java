@@ -1,21 +1,12 @@
 package com.zj0724.uiAuto.webDriver;
 
-import com.zj0724.uiAuto.WebDriver;
-import com.zj0724.uiAuto.WebElement;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.File;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class ChromeWebDriver implements WebDriver {
+public class ChromeWebDriver extends BaseWebDriver {
 
-    private final BaseWebDriver baseStepWebDriver;
-
-    /**
-     * 构造方法
-     * */
     public ChromeWebDriver(String webDriverFilePath, boolean headless) {
         try {
             ChromeOptions chromeOptions = new ChromeOptions();
@@ -37,8 +28,7 @@ public class ChromeWebDriver implements WebDriver {
             }
 
             ChromeDriver webDriver = new ChromeDriver(chromeOptions);
-            webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            this.baseStepWebDriver = new BaseWebDriver(webDriver);
+            super.setWebDriver(webDriver);
         } catch (IllegalStateException | WebDriverException e) {
             throw com.zj0724.uiAuto.exception.WebDriverException.driverFileError();
         }
@@ -54,41 +44,6 @@ public class ChromeWebDriver implements WebDriver {
 
     public ChromeWebDriver(File webDriverFile) {
         this(webDriverFile.getAbsolutePath(), false);
-    }
-
-    @Override
-    public WebElement findElementByCssSelector(String cssSelector) {
-        return this.baseStepWebDriver.findElementByCssSelector(cssSelector);
-    }
-
-    @Override
-    public List<WebElement> findElementsByCssSelector(String cssSelector) {
-        return this.baseStepWebDriver.findElementsByCssSelector(cssSelector);
-    }
-
-    @Override
-    public WebElement findElementByXpath(String xpath) {
-        return this.baseStepWebDriver.findElementByXpath(xpath);
-    }
-
-    @Override
-    public List<WebElement> findElementsByXpath(String xpath) {
-        return this.baseStepWebDriver.findElementsByXpath(xpath);
-    }
-
-    @Override
-    public void await(int Millisecond) {
-        this.baseStepWebDriver.await(Millisecond);
-    }
-
-    @Override
-    public void url(String url) {
-        this.baseStepWebDriver.url(url);
-    }
-
-    @Override
-    public void close() {
-        this.baseStepWebDriver.close();
     }
 
 }
