@@ -89,7 +89,6 @@ public class BaseWebDriver implements WebDriver {
 
     public void close() {
         if (this.webDriver != null) {
-            this.webDriver.close();
             this.webDriver.quit();
         }
     }

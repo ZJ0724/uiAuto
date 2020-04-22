@@ -10,9 +10,13 @@ public class Test1 {
 
         String path  = "E:\\ZJ\\chromeDriver\\81\\chromedriver.exe";
 
-        WebDriver webDriver = new ChromeWebDriver(path, true);
+        WebDriver webDriver = new ChromeWebDriver(path, false);
 
         webDriver.url("https://www.baidu.com");
+
+        System.out.println(1);
+
+        webDriver.close();
 
     }
 
