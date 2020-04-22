@@ -7,8 +7,8 @@
 
     <!--项目信息-->
     <groupId>com.zj0724</groupId>
-    <artifactId>StepWebDriver</artifactId>
-    <version>1.0.0</version>
+    <artifactId>uiAuto</artifactId>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -30,7 +30,7 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13-rc-2</version>
-            <scope>test</scope>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -55,12 +55,13 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                        </manifest>
-                    </archive>
+<!--                    <archive>-->
+<!--                        <manifest>-->
+<!--                            <addClasspath>true</addClasspath>-->
+<!--                            <mainClass>com.zj0724.uiAuto.Main</mainClass>-->
+<!--                            <classpathPrefix>lib/</classpathPrefix>-->
+<!--                        </manifest>-->
+<!--                    </archive>-->
                     <outputDirectory>${buildPath}</outputDirectory>
                 </configuration>
             </plugin>
@@ -70,6 +71,7 @@
                 <version>2.10</version>
                 <configuration>
                     <outputDirectory>${buildPath}/lib</outputDirectory>
+                    <excludeScope>provided</excludeScope>
                 </configuration>
                 <executions>
                     <execution>

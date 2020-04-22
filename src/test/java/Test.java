@@ -1,18 +1,20 @@
-import com.zj0724.StepWebDriver.entity.StepWebDriver;
-
-import java.io.File;
+import com.zj0724.uiAuto.WebDriver;
+import com.zj0724.uiAuto.webDriver.FirefoxWebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebElement;
 
 public class Test {
 
     public static void main(String[] args) {
 
 
-        StepWebDriver stepWebDriver = new StepWebDriver("E:/ZJ/MyProject/StepWebDriver/src/test/java/test.html", true);
-
-        stepWebDriver.url("file:///E:/ZJ/MyProject/StepWebDriver/src/test/java/test.html");
+        WebDriver webDriver = new FirefoxWebDriver("E:\\ZJ\\fireboxDriver\\geckodriver.exe", false);
 
 
-        System.out.println(stepWebDriver.findElementByCssSelector("*[id='a']").prev());
+
+
 
     }
 
