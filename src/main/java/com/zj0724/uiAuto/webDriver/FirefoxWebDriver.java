@@ -7,7 +7,24 @@ import java.io.File;
 
 public class FirefoxWebDriver extends BaseWebDriver {
 
+    /**
+     * 构造函数
+     * */
     public FirefoxWebDriver(File webDriverFile, boolean headless) {
+        this.loadWebDriver(webDriverFile, headless);
+    }
+    public FirefoxWebDriver(File webDriverFile) {
+        this.loadWebDriver(webDriverFile, true);
+    }
+    public FirefoxWebDriver(String webDriverFilePath, boolean headless) {
+        this.loadWebDriver(new File(webDriverFilePath), headless);
+    }
+    public FirefoxWebDriver(String webDriverFilePath) {
+        this.loadWebDriver(new File(webDriverFilePath), true);
+    }
+
+    @Override
+    protected void loadWebDriver(File webDriverFile, boolean headless) {
         try {
             System.setProperty("webdriver.gecko.driver", webDriverFile.getAbsolutePath());
             FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -27,16 +44,9 @@ public class FirefoxWebDriver extends BaseWebDriver {
         }
     }
 
-    public FirefoxWebDriver(File webDriverFile) {
-        this(webDriverFile, true);
-    }
+    @Override
+    protected void loadWebDriver(boolean headless) {
 
-    public FirefoxWebDriver(String webDriverFilePath, boolean headless) {
-        this(new File(webDriverFilePath), headless);
-    }
-
-    public FirefoxWebDriver(String webDriverFilePath) {
-        this(new File(webDriverFilePath), true);
     }
 
 }

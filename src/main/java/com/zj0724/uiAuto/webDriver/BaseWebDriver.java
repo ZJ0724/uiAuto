@@ -5,20 +5,58 @@ import com.zj0724.uiAuto.exception.ErrorException;
 import com.zj0724.uiAuto.exception.GrammarException;
 import com.zj0724.uiAuto.exception.WebElementException;
 import org.openqa.selenium.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class BaseWebDriver implements WebDriver {
+public abstract class BaseWebDriver implements WebDriver {
 
     private org.openqa.selenium.WebDriver webDriver;
 
+    /**
+     * 构造函数
+     * */
     protected BaseWebDriver() {}
 
+    /**
+     * 加载驱动
+     * */
+    protected abstract void loadWebDriver(File webDriverFile, boolean headless);
+    protected abstract void loadWebDriver(boolean headless);
+
+    /**
+     * 设置驱动
+     * */
     protected void setWebDriver(org.openqa.selenium.WebDriver webDriver) {
         this.webDriver = webDriver;
         this.webDriver.manage().window().maximize();
         this.webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    /**
+     * 生成驱动文件
+     * */
+    protected void createWebDriverFile(com.zj0724.uiAuto.constant.WebDriver webDriver) {
+        File webDriverFile = webDriver.getWebDriverFile();
+        if (!webDriverFile.exists()) {
+            File parentPath = webDriverFile.getParentFile();
+            if (!parentPath.exists()) {
+                parentPath.mkdirs();
+            }
+            try {
+                InputStream inputStream = BaseWebDriver.class.getResourceAsStream(webDriver.getWebDriverResource());
+                OutputStream outputStream = new FileOutputStream(webDriverFile);
+                byte[] bytes = new byte[inputStream.available()];
+                inputStream.read(bytes);
+                outputStream.write(bytes);
+                outputStream.flush();
+                outputStream.close();
+                inputStream.close();
+            } catch (IOException e) {
+                throw ErrorException.bug("创建驱动文件出错" + e.getMessage());
+            }
+        }
     }
 
     public com.zj0724.uiAuto.WebElement findElementByCssSelector(String cssSelector) {
