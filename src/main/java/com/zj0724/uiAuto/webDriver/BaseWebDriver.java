@@ -42,6 +42,7 @@ public abstract class BaseWebDriver implements WebDriver {
     protected void createWebDriverFile(com.zj0724.uiAuto.constant.WebDriver webDriver) {
         File webDriverFile = webDriver.getWebDriverFile();
         if (!webDriverFile.exists()) {
+            System.out.println("驱动文件不存在");
             File parentPath = webDriverFile.getParentFile();
             if (!parentPath.exists()) {
                 parentPath.mkdirs();
@@ -66,8 +67,11 @@ public abstract class BaseWebDriver implements WebDriver {
             if (ProjectConfig.SYSTEM_TYPE == SystemType.LINUX) {
                 try {
                     Runtime.getRuntime().exec("sudo chmod 777 " + webDriverFile.getAbsolutePath());
+                    Thread.sleep(500);
                 } catch (IOException e) {
                     throw ErrorException.bug("赋权限bug");
+                } catch (java.lang.InterruptedException e) {
+                    throw ErrorException.bug("等待异常");
                 }
             }
         }

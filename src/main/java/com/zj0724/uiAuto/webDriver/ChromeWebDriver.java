@@ -49,6 +49,7 @@ public class ChromeWebDriver extends BaseWebDriver {
 
             super.setWebDriver(new ChromeDriver(chromeOptions));
         } catch (IllegalStateException | WebDriverException e) {
+            System.out.println(e.getMessage());
             throw com.zj0724.uiAuto.exception.WebDriverException.driverFileError();
         }
     }
@@ -65,6 +66,7 @@ public class ChromeWebDriver extends BaseWebDriver {
         }
 
         super.createWebDriverFile(webDriver);
+        System.out.println(webDriver.getWebDriverFile());
         this.loadWebDriver(webDriver.getWebDriverFile(), headless);
     }
 
