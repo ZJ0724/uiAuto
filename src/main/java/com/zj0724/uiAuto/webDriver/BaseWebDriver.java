@@ -47,12 +47,15 @@ public abstract class BaseWebDriver implements WebDriver {
             try {
                 InputStream inputStream = BaseWebDriver.class.getResourceAsStream(webDriver.getWebDriverResource());
                 OutputStream outputStream = new FileOutputStream(webDriverFile);
-                byte[] bytes = new byte[inputStream.available()];
-                inputStream.read(bytes);
-                outputStream.write(bytes);
-//                outputStream.flush();
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+                BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
+                byte[] bytes = new byte[bufferedInputStream.available()];
+                bufferedInputStream.read(bytes);
+                bufferedOutputStream.write(bytes);
                 outputStream.close();
                 inputStream.close();
+                bufferedInputStream.close();
+                bufferedOutputStream.close();
             } catch (IOException e) {
                 throw ErrorException.bug("创建驱动文件出错" + e.getMessage());
             }
