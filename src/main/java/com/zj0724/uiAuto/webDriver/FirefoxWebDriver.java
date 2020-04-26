@@ -1,5 +1,9 @@
 package com.zj0724.uiAuto.webDriver;
 
+import com.zj0724.uiAuto.config.ProjectConfig;
+import com.zj0724.uiAuto.constant.SystemType;
+import com.zj0724.uiAuto.constant.WebDriver;
+import com.zj0724.uiAuto.exception.ErrorException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -10,6 +14,12 @@ public class FirefoxWebDriver extends BaseWebDriver {
     /**
      * 构造函数
      * */
+    public FirefoxWebDriver(boolean headless) {
+        this.loadWebDriver(headless);
+    }
+    public FirefoxWebDriver() {
+        this.loadWebDriver(true);
+    }
     public FirefoxWebDriver(File webDriverFile, boolean headless) {
         this.loadWebDriver(webDriverFile, headless);
     }
@@ -30,10 +40,8 @@ public class FirefoxWebDriver extends BaseWebDriver {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             firefoxOptions.setHeadless(headless);
 
-            // 系统类型
-            String OsName = System.getProperty("os.name");
             // linux
-            if (OsName.contains("Linux")) {
+            if (ProjectConfig.SYSTEM_TYPE == SystemType.LINUX) {
                 firefoxOptions.setHeadless(true);
                 firefoxOptions.addArguments("--no-sandbox");
             }
@@ -46,7 +54,17 @@ public class FirefoxWebDriver extends BaseWebDriver {
 
     @Override
     protected void loadWebDriver(boolean headless) {
+        WebDriver webDriver;
+        if (ProjectConfig.SYSTEM_TYPE == SystemType.WINDOWS) {
+            webDriver = WebDriver.WINDOWS_CHROME_WEB_DRIVER;
+        } else if (ProjectConfig.SYSTEM_TYPE == SystemType.LINUX) {
+            webDriver = WebDriver.LINUX_CHROME_WEB_DRIVER;
+        } else {
+            throw ErrorException.bug("系统类型未找到");
+        }
 
+        super.createWebDriverFile(webDriver);
+        this.loadWebDriver(webDriver.getWebDriverFile(), headless);
     }
 
 }
