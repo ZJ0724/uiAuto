@@ -20,7 +20,7 @@ ui自动化框架，基于selenium封装。
 
 驱动接口。
 
-> **package**
+> **package：**
 >
 > com.zj0724.uiAuto
 
@@ -155,5 +155,42 @@ ui自动化框架，基于selenium封装。
 >  * 关闭驱动
 >  * */
 > void close();
+> ```
+
+
+
+### class WebElement
+
+一个元素对象。
+
+> **package：**
+>
+> com.zj0724.uiAuto
+
+> **方法：**
+>
+> ```java
+> /**
+>  * 点击元素
+>  * */
+> public void click();
+> ```
+>
+> ```java
+> /**
+>  * 输入框输入参数
+>  * 
+>  * @param value 要输入的参数
+>  * */
+> public void sendKey(String value);
+> ```
+>
+> ```java
+> /**
+>  * 获取父级元素
+>  * 
+>  * @return 返回父级元素，如果不存在父级元素，抛出元素未找到异常
+>  * */
+> public WebElement parent();
 > ```
 
