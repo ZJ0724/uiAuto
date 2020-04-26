@@ -23,7 +23,9 @@ public class WebElement {
     }
 
     /**
-     * 输入
+     * 输入框输入参数
+     *
+     * @param value 要输入的参数
      * */
     public void sendKey(String value) {
         try {
@@ -35,6 +37,8 @@ public class WebElement {
 
     /**
      * 获取父级元素
+     *
+     * @return 返回父级元素，如果不存在父级元素，返回null
      * */
     public WebElement parent() {
         try {

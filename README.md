@@ -20,6 +20,10 @@ ui自动化框架，基于selenium封装。
 
 驱动接口。
 
+> **package**
+>
+> com.zj0724.uiAuto
+
 > **实现类：**
 >
 > `ChromeWebDriver`、`FirefoxWebDriver`
@@ -81,3 +85,75 @@ ui自动化框架，基于selenium封装。
 > */ 
 > ChromeWebDriver(File webDriverFile)
 > ```
+
+> **方法：**
+>
+> ```java
+> /**
+> * 通过cssSelector查找元素
+> *
+> * @param cssSelector css选择器
+> *
+> * @return WebElement 一个元素
+> * */
+> WebElement findElementByCssSelector(String cssSelector);
+> ```
+>
+> ```java
+> /**
+>  * 通过cssSelector查找元素
+>  *
+>  * @param cssSelector css选择器
+>  * 
+>  * @return List<WebElement> 返回一个元素集合
+>  * */
+> List<WebElement> findElementsByCssSelector(String cssSelector);
+> ```
+>
+> ```java
+> /**
+>  * 通过xpath查找元素
+>  *
+>  * @param xpath xpath语法
+>  * 
+>  * @return WebElement 返回一个元素
+>  * */
+> WebElement findElementByXpath(String xpath);
+> ```
+>
+> ```java
+> /**
+>  * 通过xpath查找元素
+>  * 
+>  * @param xpath xpath语法
+>  *
+>  * @return List<WebElement> 返回一个元素集合
+>  * */
+> List<WebElement> findElementsByXpath(String xpath);
+> ```
+>
+> ```java
+> /**
+>  * 线程等待
+>  *
+>  * @param Millisecond 要等待的毫秒数
+>  * */
+> void await(int Millisecond);
+> ```
+>
+> ```java
+> /**
+>  * 打开网址
+>  *
+>  * @param url 要打开的网址
+>  * */
+> void url(String url);
+> ```
+>
+> ```java
+> /**
+>  * 关闭驱动
+>  * */
+> void close();
+> ```
+
