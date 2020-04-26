@@ -8,7 +8,12 @@ public enum WebDriver {
     WINDOWS_CHROME_WEB_DRIVER(new File(ProjectConfig.CONFIG_PATH, "chromeWebDriver/chromedriver.exe"),
             "/chromeWebDriver/windows/chromedriver.exe"),
     LINUX_CHROME_WEB_DRIVER(new File(ProjectConfig.CONFIG_PATH, "chromeWebDriver/chromedriver"),
-            "/chromeWebDriver/linux/chromedriver");
+            "/chromeWebDriver/linux/chromedriver"),
+
+    WINDOWS_FIREFOX_WEB_DRIVER(new File(ProjectConfig.CONFIG_PATH, "firefoxWebDriver/geckodriver.exe"),
+            "/firefoxWebDriver/windows/geckodriver.exe"),
+    LINUX_FIREFOX_WEB_DRIVER(new File(ProjectConfig.CONFIG_PATH, "firefoxWebDriver/geckodriver"),
+            "/firefoxWebDriver/linux/geckodriver");
 
     private final File webDriverFile;
 

@@ -50,7 +50,7 @@ public abstract class BaseWebDriver implements WebDriver {
                 byte[] bytes = new byte[inputStream.available()];
                 inputStream.read(bytes);
                 outputStream.write(bytes);
-                outputStream.flush();
+//                outputStream.flush();
                 outputStream.close();
                 inputStream.close();
             } catch (IOException e) {
@@ -128,6 +128,7 @@ public abstract class BaseWebDriver implements WebDriver {
     public void close() {
         if (this.webDriver != null) {
             this.webDriver.quit();
+            this.webDriver = null;
         }
     }
 

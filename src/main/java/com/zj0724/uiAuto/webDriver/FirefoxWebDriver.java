@@ -56,14 +56,15 @@ public class FirefoxWebDriver extends BaseWebDriver {
     protected void loadWebDriver(boolean headless) {
         WebDriver webDriver;
         if (ProjectConfig.SYSTEM_TYPE == SystemType.WINDOWS) {
-            webDriver = WebDriver.WINDOWS_CHROME_WEB_DRIVER;
+            webDriver = WebDriver.WINDOWS_FIREFOX_WEB_DRIVER;
         } else if (ProjectConfig.SYSTEM_TYPE == SystemType.LINUX) {
-            webDriver = WebDriver.LINUX_CHROME_WEB_DRIVER;
+            webDriver = WebDriver.LINUX_FIREFOX_WEB_DRIVER;
         } else {
             throw ErrorException.bug("系统类型未找到");
         }
 
         super.createWebDriverFile(webDriver);
+        System.out.println(webDriver.getWebDriverFile());
         this.loadWebDriver(webDriver.getWebDriverFile(), headless);
     }
 
