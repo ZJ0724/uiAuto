@@ -1,6 +1,8 @@
 package com.zj0724.uiAuto.webDriver;
 
 import com.zj0724.uiAuto.WebDriver;
+import com.zj0724.uiAuto.config.ProjectConfig;
+import com.zj0724.uiAuto.constant.SystemType;
 import com.zj0724.uiAuto.exception.ErrorException;
 import com.zj0724.uiAuto.exception.GrammarException;
 import com.zj0724.uiAuto.exception.WebElementException;
@@ -58,6 +60,15 @@ public abstract class BaseWebDriver implements WebDriver {
                 bufferedOutputStream.close();
             } catch (IOException e) {
                 throw ErrorException.bug("创建驱动文件出错" + e.getMessage());
+            }
+
+            // linux系统要给驱动设置777权限
+            if (ProjectConfig.SYSTEM_TYPE == SystemType.LINUX) {
+                try {
+                    Runtime.getRuntime().exec("sudo chmod 777 " + webDriverFile.getAbsolutePath());
+                } catch (IOException e) {
+                    throw ErrorException.bug("赋权限bug");
+                }
             }
         }
     }
