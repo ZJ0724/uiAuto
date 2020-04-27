@@ -7,12 +7,16 @@ public interface WebDriver {
     /**
      * 通过cssSelector查找元素
      *
+     * @param cssSelector css选择器
+     *
      * @return WebElement 一个元素
      * */
     WebElement findElementByCssSelector(String cssSelector);
 
     /**
      * 通过cssSelector查找元素
+     *
+     * @param cssSelector css选择器
      *
      * @return List<WebElement> 返回一个元素集合
      * */
@@ -21,12 +25,16 @@ public interface WebDriver {
     /**
      * 通过xpath查找元素
      *
+     * @param xpath xpath语法
+     *
      * @return WebElement 返回一个元素
      * */
     WebElement findElementByXpath(String xpath);
 
     /**
      * 通过xpath查找元素
+     *
+     * @param xpath xpath语法
      *
      * @return List<WebElement> 返回一个元素集合
      * */

@@ -1,5 +1,9 @@
 package com.zj0724.uiAuto.webDriver;
 
+import com.zj0724.uiAuto.config.ProjectConfig;
+import com.zj0724.uiAuto.constant.SystemType;
+import com.zj0724.uiAuto.constant.WebDriver;
+import com.zj0724.uiAuto.exception.ErrorException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -7,16 +11,37 @@ import java.io.File;
 
 public class FirefoxWebDriver extends BaseWebDriver {
 
+    /**
+     * 构造函数
+     * */
+    public FirefoxWebDriver(boolean headless) {
+        this.loadWebDriver(headless);
+    }
+    public FirefoxWebDriver() {
+        this.loadWebDriver(true);
+    }
     public FirefoxWebDriver(File webDriverFile, boolean headless) {
+        this.loadWebDriver(webDriverFile, headless);
+    }
+    public FirefoxWebDriver(File webDriverFile) {
+        this.loadWebDriver(webDriverFile, true);
+    }
+    public FirefoxWebDriver(String webDriverFilePath, boolean headless) {
+        this.loadWebDriver(new File(webDriverFilePath), headless);
+    }
+    public FirefoxWebDriver(String webDriverFilePath) {
+        this.loadWebDriver(new File(webDriverFilePath), true);
+    }
+
+    @Override
+    protected void loadWebDriver(File webDriverFile, boolean headless) {
         try {
             System.setProperty("webdriver.gecko.driver", webDriverFile.getAbsolutePath());
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             firefoxOptions.setHeadless(headless);
 
-            // 系统类型
-            String OsName = System.getProperty("os.name");
             // linux
-            if (OsName.contains("Linux")) {
+            if (ProjectConfig.SYSTEM_TYPE == SystemType.LINUX) {
                 firefoxOptions.setHeadless(true);
                 firefoxOptions.addArguments("--no-sandbox");
             }
@@ -27,16 +52,20 @@ public class FirefoxWebDriver extends BaseWebDriver {
         }
     }
 
-    public FirefoxWebDriver(File webDriverFile) {
-        this(webDriverFile, true);
-    }
+    @Override
+    protected void loadWebDriver(boolean headless) {
+        WebDriver webDriver;
+        if (ProjectConfig.SYSTEM_TYPE == SystemType.WINDOWS) {
+            webDriver = WebDriver.WINDOWS_FIREFOX_WEB_DRIVER;
+        } else if (ProjectConfig.SYSTEM_TYPE == SystemType.LINUX) {
+            webDriver = WebDriver.LINUX_FIREFOX_WEB_DRIVER;
+        } else {
+            throw ErrorException.bug("系统类型未找到");
+        }
 
-    public FirefoxWebDriver(String webDriverFilePath, boolean headless) {
-        this(new File(webDriverFilePath), headless);
-    }
-
-    public FirefoxWebDriver(String webDriverFilePath) {
-        this(new File(webDriverFilePath), true);
+        super.createWebDriverFile(webDriver);
+        System.out.println(webDriver.getWebDriverFile());
+        this.loadWebDriver(webDriver.getWebDriverFile(), headless);
     }
 
 }
