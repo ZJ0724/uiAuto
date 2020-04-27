@@ -193,4 +193,42 @@ ui自动化框架，基于selenium封装。
 >  * */
 > public WebElement parent();
 > ```
+>
+> ```java
+> /**
+>  * 获取元素属性值
+>  * 
+>  * @param name 元素属性名
+>  * */
+> public String getAttribute(String name);
+> ```
+>
+> ```java
+> /**
+>  * 获取子元素
+>  * 
+>  * @param index 元素索引，从1开始
+>  *              
+>  * @return 返回子元素，如果不存在，抛出元素未找到异常
+>  * */
+> public WebElement children(int index);
+> ```
+>
+> ```java
+> /**
+>  * 获取下一个元素
+>  * 
+>  * @return  返回同级下一个元素，如果不存在，抛出元素未找到异常
+>  * */
+> public WebElement next();
+> ```
+>
+> ```java
+> /**
+>  * 获取上一个元素
+>  * 
+>  * @return 返回同级上一个元素，如果不存在，抛出元素未找到异常
+>  * */
+> public WebElement prev();
+> ```
 
