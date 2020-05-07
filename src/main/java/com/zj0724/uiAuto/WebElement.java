@@ -1,9 +1,10 @@
 package com.zj0724.uiAuto;
 
 import com.zj0724.uiAuto.exception.WebElementException;
+import com.zj0724.uiAuto.webElement.Action;
 import org.openqa.selenium.*;
 
-public class WebElement {
+public class WebElement implements Action {
 
     private org.openqa.selenium.WebElement element = null;
 
@@ -108,6 +109,21 @@ public class WebElement {
     @Override
     public String toString() {
         return this.element.toString();
+    }
+
+    @Override
+    public Integer getChildNumber() {
+        return this.element.findElements(By.xpath("./child::*")).size();
+    }
+
+    @Override
+    public String getText() {
+        return this.element.getAttribute("innerText");
+    }
+
+    @Override
+    public boolean isDisplay() {
+        return this.element.isDisplayed();
     }
 
 }
