@@ -1,80 +1,54 @@
 package com.zj0724.uiAuto.webDriver;
 
 import com.zj0724.uiAuto.WebDriver;
-import com.zj0724.uiAuto.config.ProjectConfig;
-import com.zj0724.uiAuto.constant.SystemType;
 import com.zj0724.uiAuto.exception.ErrorException;
 import com.zj0724.uiAuto.exception.GrammarException;
 import com.zj0724.uiAuto.exception.WebElementException;
 import org.openqa.selenium.*;
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseWebDriver implements WebDriver {
 
+    /**
+     * 驱动文件
+     * */
+    protected File webDriverFile;
+
+    /**
+     * 是否显示浏览器
+     * */
+    protected boolean headless;
+
+    /**
+     * 驱动
+     */
     private org.openqa.selenium.WebDriver webDriver;
 
     /**
      * 构造函数
      * */
-    protected BaseWebDriver() {}
+    protected BaseWebDriver(File webDriverFile, boolean headless) {
+        this.webDriverFile = webDriverFile;
+        this.headless = headless;
+        this.webDriver = this.loadWebDriver();
+        this.setWebDriver();
+    }
+
 
     /**
      * 加载驱动
      * */
-    protected abstract void loadWebDriver(File webDriverFile, boolean headless);
-    protected abstract void loadWebDriver(boolean headless);
+    protected abstract org.openqa.selenium.WebDriver loadWebDriver();
 
     /**
      * 设置驱动
      * */
-    protected void setWebDriver(org.openqa.selenium.WebDriver webDriver) {
-        this.webDriver = webDriver;
+    private void setWebDriver() {
         this.webDriver.manage().window().maximize();
         this.webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-
-    /**
-     * 生成驱动文件
-     * */
-    protected void createWebDriverFile(com.zj0724.uiAuto.constant.WebDriver webDriver) {
-        File webDriverFile = webDriver.getWebDriverFile();
-        if (!webDriverFile.exists()) {
-            System.out.println("驱动文件不存在");
-            File parentPath = webDriverFile.getParentFile();
-            if (!parentPath.exists()) {
-                parentPath.mkdirs();
-            }
-            try {
-                InputStream inputStream = BaseWebDriver.class.getResourceAsStream(webDriver.getWebDriverResource());
-                OutputStream outputStream = new FileOutputStream(webDriverFile);
-                BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-                BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
-                byte[] bytes = new byte[bufferedInputStream.available()];
-                bufferedInputStream.read(bytes);
-                bufferedOutputStream.write(bytes);
-                outputStream.close();
-                inputStream.close();
-                bufferedInputStream.close();
-                bufferedOutputStream.close();
-            } catch (IOException e) {
-                throw ErrorException.bug("创建驱动文件出错" + e.getMessage());
-            }
-
-            // linux系统要给驱动设置777权限
-            if (ProjectConfig.SYSTEM_TYPE == SystemType.LINUX) {
-                try {
-                    Runtime.getRuntime().exec("sudo chmod 777 " + webDriverFile.getAbsolutePath());
-                    Thread.sleep(500);
-                } catch (IOException e) {
-                    throw ErrorException.bug("赋权限bug");
-                } catch (java.lang.InterruptedException e) {
-                    throw ErrorException.bug("等待异常");
-                }
-            }
-        }
     }
 
     public com.zj0724.uiAuto.WebElement findElementByCssSelector(String cssSelector) {
