@@ -1,8 +1,8 @@
 package com.zj0724.uiAuto.exception;
 
-public class WebElementException extends RuntimeException {
+public class WebElementException extends BaseException {
 
-    public WebElementException(String message){
+    private WebElementException(String message){
         super(message);
     }
 
@@ -11,6 +11,20 @@ public class WebElementException extends RuntimeException {
      * */
     public static WebElementException elementNotFind() {
         return new WebElementException("元素未找到");
+    }
+
+    /**
+     * 元素不能点击
+     * */
+    public static WebElementException elementNotClick() {
+        return new WebElementException("元素不能点击");
+    }
+
+    /**
+     * 元素不能输入
+     * */
+    public static WebElementException elementNotInput() {
+        return new WebElementException("元素不能输入");
     }
 
 }

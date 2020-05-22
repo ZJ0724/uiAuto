@@ -1,9 +1,8 @@
 package com.zj0724.uiAuto.webDriver;
 
 import com.zj0724.uiAuto.config.ProjectConfig;
-import com.zj0724.uiAuto.constant.SystemType;
-import com.zj0724.uiAuto.constant.WebDriver;
-import com.zj0724.uiAuto.exception.ErrorException;
+import com.zj0724.uiAuto.config.SystemOSConfig;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -14,58 +13,46 @@ public class FirefoxWebDriver extends BaseWebDriver {
     /**
      * 构造函数
      * */
-    public FirefoxWebDriver(boolean headless) {
-        this.loadWebDriver(headless);
-    }
-    public FirefoxWebDriver() {
-        this.loadWebDriver(true);
-    }
     public FirefoxWebDriver(File webDriverFile, boolean headless) {
-        this.loadWebDriver(webDriverFile, headless);
+        super(webDriverFile, headless);
     }
     public FirefoxWebDriver(File webDriverFile) {
-        this.loadWebDriver(webDriverFile, true);
+        this(webDriverFile, true);
     }
     public FirefoxWebDriver(String webDriverFilePath, boolean headless) {
-        this.loadWebDriver(new File(webDriverFilePath), headless);
+        this(new File(webDriverFilePath), headless);
     }
     public FirefoxWebDriver(String webDriverFilePath) {
-        this.loadWebDriver(new File(webDriverFilePath), true);
+        this(webDriverFilePath, true);
     }
 
     @Override
-    protected void loadWebDriver(File webDriverFile, boolean headless) {
-        try {
-            System.setProperty("webdriver.gecko.driver", webDriverFile.getAbsolutePath());
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
+    protected WebDriver loadWebDriver() {
+        // 返回的驱动
+        WebDriver result = null;
+
+        System.setProperty("webdriver.gecko.driver", webDriverFile.getAbsolutePath());
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+
+        // windows设置headless
+        if (ProjectConfig.SYSTEM_TYPE == SystemOSConfig.WINDOWS) {
             firefoxOptions.setHeadless(headless);
+        }
 
-            // linux
-            if (ProjectConfig.SYSTEM_TYPE == SystemType.LINUX) {
-                firefoxOptions.setHeadless(true);
-                firefoxOptions.addArguments("--no-sandbox");
-            }
+        // linux默认设置headless为true，并开启沙盒
+        if (ProjectConfig.SYSTEM_TYPE == SystemOSConfig.LINUX) {
+            firefoxOptions.setHeadless(true);
+            firefoxOptions.addArguments("--no-sandbox");
+        }
 
-            super.setWebDriver(new FirefoxDriver(firefoxOptions));
+        // 实例化驱动
+        try {
+            result = new FirefoxDriver(firefoxOptions);
         } catch (IllegalStateException | WebDriverException e) {
             throw com.zj0724.uiAuto.exception.WebDriverException.driverFileError();
         }
-    }
 
-    @Override
-    protected void loadWebDriver(boolean headless) {
-        WebDriver webDriver;
-        if (ProjectConfig.SYSTEM_TYPE == SystemType.WINDOWS) {
-            webDriver = WebDriver.WINDOWS_FIREFOX_WEB_DRIVER;
-        } else if (ProjectConfig.SYSTEM_TYPE == SystemType.LINUX) {
-            webDriver = WebDriver.LINUX_FIREFOX_WEB_DRIVER;
-        } else {
-            throw ErrorException.bug("系统类型未找到");
-        }
-
-        super.createWebDriverFile(webDriver);
-        System.out.println(webDriver.getWebDriverFile());
-        this.loadWebDriver(webDriver.getWebDriverFile(), headless);
+        return result;
     }
 
 }

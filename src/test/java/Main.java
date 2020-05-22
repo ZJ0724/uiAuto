@@ -1,26 +1,34 @@
 import com.zj0724.uiAuto.WebDriver;
-import com.zj0724.uiAuto.WebElement;
 import com.zj0724.uiAuto.webDriver.ChromeWebDriver;
 import com.zj0724.uiAuto.webDriver.FirefoxWebDriver;
+import org.junit.Test;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    /**
+     * 谷歌驱动测试
+     * */
+    @Test
+    public void chromeDriverTest() {
+        // 驱动文件路径
+        String webDriverPath = "E:\\ZJ\\chromeDriver\\83\\chromedriver.exe";
 
-        WebDriver webDriver = new ChromeWebDriver();
-
-        webDriver.url("http://localhost:63342/uiAuto/test.html?_ijt=h27d7asgkflmmas0g148od9gpl");
-
-        WebElement webElement = webDriver.findElementByCssSelector("#a > div");
-
-
-        System.out.println(webElement.getText());
-        System.out.println(webElement.getAttribute("innerText"));
-        System.out.println(webElement.getAttribute("innerHTML"));
-
-
+        WebDriver webDriver = new ChromeWebDriver(webDriverPath);
         webDriver.close();
+        System.out.println("ok");
+    }
 
+    /**
+     * 火狐驱动测试
+     * */
+    @Test
+    public void firefoxDriverTest() {
+        // 驱动文件路径
+        String webDriverPath = "E:\\ZJ\\fireboxDriver\\geckodriver.exe";
+
+        WebDriver webDriver = new FirefoxWebDriver(webDriverPath);
+        webDriver.close();
+        System.out.println("ok");
     }
 
 }

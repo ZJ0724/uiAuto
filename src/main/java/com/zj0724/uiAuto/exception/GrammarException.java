@@ -1,8 +1,8 @@
 package com.zj0724.uiAuto.exception;
 
-public class GrammarException extends RuntimeException {
+public class GrammarException extends BaseException {
 
-    public GrammarException(String message) {
+    private GrammarException(String message) {
         super(message);
     }
 
