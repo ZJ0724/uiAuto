@@ -6,6 +6,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChromeWebDriver extends BaseWebDriver {
 
@@ -29,13 +31,15 @@ public class ChromeWebDriver extends BaseWebDriver {
     protected WebDriver loadWebDriver() {
         // 返回的驱动程序
         WebDriver webDriver = null;
+        // 谷歌设置
+        ChromeOptions chromeOptions = new ChromeOptions();
+        // 设置List
+        List<String> options = new ArrayList<>();
 
         System.setProperty("webdriver.chrome.driver", this.webDriverFile.getAbsolutePath());
 
-        // 设置
-        ChromeOptions chromeOptions = new ChromeOptions();
         // 设置浏览器最大化
-        chromeOptions.addArguments("start-maximized");
+        options.add("start-maximized");
 
         // windows系统设置headless
         if (ProjectConfig.SYSTEM_TYPE == SystemOSConfig.WINDOWS) {
@@ -45,8 +49,10 @@ public class ChromeWebDriver extends BaseWebDriver {
         // linux系统默认设置headless为true，并设置沙盒模式
         if (ProjectConfig.SYSTEM_TYPE == SystemOSConfig.LINUX) {
             chromeOptions.setHeadless(true);
-            chromeOptions.addArguments("no-sandbox");
+            options.add("no-sandbox");
         }
+
+        chromeOptions.addArguments(options);
 
         // 实例化驱动
         try {
