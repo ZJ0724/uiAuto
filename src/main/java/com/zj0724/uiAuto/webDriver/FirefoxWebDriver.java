@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirefoxWebDriver extends BaseWebDriver {
 
@@ -30,9 +32,12 @@ public class FirefoxWebDriver extends BaseWebDriver {
     protected WebDriver loadWebDriver() {
         // 返回的驱动
         WebDriver result = null;
+        // 火狐设置
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        // 火狐设置List
+        List<String> options = new ArrayList<>();
 
         System.setProperty("webdriver.gecko.driver", webDriverFile.getAbsolutePath());
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
 
         // windows设置headless
         if (ProjectConfig.SYSTEM_TYPE == SystemOSConfig.WINDOWS) {
@@ -42,8 +47,10 @@ public class FirefoxWebDriver extends BaseWebDriver {
         // linux默认设置headless为true，并开启沙盒
         if (ProjectConfig.SYSTEM_TYPE == SystemOSConfig.LINUX) {
             firefoxOptions.setHeadless(true);
-            firefoxOptions.addArguments("--no-sandbox");
+            options.add("--no-sandbox");
         }
+
+        firefoxOptions.addArguments(options);
 
         // 实例化驱动
         try {
