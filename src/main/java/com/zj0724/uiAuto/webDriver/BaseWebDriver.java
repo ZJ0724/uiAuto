@@ -35,10 +35,8 @@ public abstract class BaseWebDriver implements WebDriver {
     protected BaseWebDriver(File webDriverFile, boolean headless) {
         this.webDriverFile = webDriverFile;
         this.headless = headless;
-        this.webDriver = this.loadWebDriver();
         this.setWebDriver();
     }
-
 
     /**
      * 加载驱动
@@ -49,6 +47,7 @@ public abstract class BaseWebDriver implements WebDriver {
      * 设置驱动
      * */
     private void setWebDriver() {
+        this.webDriver = loadWebDriver();
         this.webDriver.manage().window().maximize();
         this.webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
