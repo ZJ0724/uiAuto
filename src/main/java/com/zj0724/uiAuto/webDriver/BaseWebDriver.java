@@ -3,7 +3,9 @@ package com.zj0724.uiAuto.webDriver;
 import com.zj0724.uiAuto.WebDriver;
 import com.zj0724.uiAuto.exception.ErrorException;
 import com.zj0724.uiAuto.exception.GrammarException;
-import com.zj0724.uiAuto.exception.WebElementException;
+import com.zj0724.uiAuto.exception.webElement.WebElementNotFoundException;
+import com.zj0724.uiAuto.webElement.BaseWebElement;
+import com.zj0724.uiAuto.webElement.WebElementProxy;
 import org.openqa.selenium.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -51,56 +53,61 @@ public abstract class BaseWebDriver implements WebDriver {
         this.webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
+    @Override
     public com.zj0724.uiAuto.WebElement findElementByCssSelector(String cssSelector) {
         try {
-            return new com.zj0724.uiAuto.WebElement(webDriver.findElement(By.cssSelector(cssSelector)));
+            return WebElementProxy.getWebElementProxy(new BaseWebElement(webDriver.findElement(By.cssSelector(cssSelector)), cssSelector));
         } catch (InvalidSelectorException e) {
             throw GrammarException.cssGrammarException();
         } catch (NoSuchElementException e) {
-            throw WebElementException.elementNotFind();
+            throw WebElementNotFoundException.getInstance(cssSelector);
         }
     }
 
+    @Override
     public List<com.zj0724.uiAuto.WebElement> findElementsByCssSelector(String cssSelector) {
         try {
             List<com.zj0724.uiAuto.WebElement> result = new ArrayList<>();
             List<org.openqa.selenium.WebElement> elements = webDriver.findElements(By.cssSelector(cssSelector));
             for (org.openqa.selenium.WebElement element : elements) {
-                result.add(new com.zj0724.uiAuto.WebElement(element));
+                result.add(WebElementProxy.getWebElementProxy(new BaseWebElement(element, cssSelector)));
             }
             return result;
         } catch (InvalidSelectorException e) {
             throw GrammarException.cssGrammarException();
         } catch (NoSuchElementException e) {
-            throw WebElementException.elementNotFind();
+            throw WebElementNotFoundException.getInstance(cssSelector);
         }
     }
 
+    @Override
     public com.zj0724.uiAuto.WebElement findElementByXpath(String xpath) {
         try {
-            return new com.zj0724.uiAuto.WebElement(webDriver.findElement(By.xpath(xpath)));
+            return WebElementProxy.getWebElementProxy(new BaseWebElement(webDriver.findElement(By.xpath(xpath)), xpath));
         } catch (InvalidSelectorException e) {
             throw GrammarException.xpathGrammarException();
         } catch (NoSuchElementException e) {
-            throw WebElementException.elementNotFind();
+            throw WebElementNotFoundException.getInstance(xpath);
         }
     }
 
+    @Override
     public List<com.zj0724.uiAuto.WebElement> findElementsByXpath(String xpath) {
         try {
             List<com.zj0724.uiAuto.WebElement> result = new ArrayList<>();
             List<org.openqa.selenium.WebElement> elements = webDriver.findElements(By.xpath(xpath));
             for (org.openqa.selenium.WebElement element : elements) {
-                result.add(new com.zj0724.uiAuto.WebElement(element));
+                result.add(WebElementProxy.getWebElementProxy(new BaseWebElement(element, xpath)));
             }
             return result;
         } catch (InvalidSelectorException e) {
             throw GrammarException.xpathGrammarException();
         } catch (NoSuchElementException e) {
-            throw WebElementException.elementNotFind();
+            throw WebElementNotFoundException.getInstance(xpath);
         }
     }
 
+    @Override
     public void await(int Millisecond) {
         try {
             Thread.sleep(Millisecond);
@@ -109,6 +116,7 @@ public abstract class BaseWebDriver implements WebDriver {
         }
     }
 
+    @Override
     public void url(String url) {
         try {
             this.webDriver.get(url);
@@ -117,6 +125,7 @@ public abstract class BaseWebDriver implements WebDriver {
         }
     }
 
+    @Override
     public void close() {
         if (this.webDriver != null) {
             this.webDriver.quit();

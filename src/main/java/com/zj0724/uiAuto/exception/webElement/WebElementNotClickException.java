@@ -1,6 +1,6 @@
-package com.zj0724.uiAuto.exception;
+package com.zj0724.uiAuto.exception.webElement;
 
-import com.zj0724.uiAuto.WebElement;
+import com.zj0724.uiAuto.exception.BaseException;
 
 /**
  * 元素不能点击异常
@@ -16,12 +16,12 @@ public class WebElementNotClickException extends BaseException {
     /**
      * 获取异常实体
      *
-     * @param webElement 元素实体
+     * @param selector 选择器
      *
      * @return 异常实体
      * */
-    public static WebElementNotClickException getInstance(WebElement webElement) {
-        return new WebElementNotClickException(webElement.toString());
+    public static WebElementNotClickException getInstance(String selector) {
+        return new WebElementNotClickException(selector);
     }
 
 }

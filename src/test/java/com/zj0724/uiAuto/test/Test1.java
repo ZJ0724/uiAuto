@@ -16,7 +16,7 @@ public class Test1 {
 
         WebElement webElement = webDriver.findElementByXpath("/html/body/button");
 
-//        webDriver.await(6000);
+        webDriver.await(6000);
 
         webElement.click();
 
