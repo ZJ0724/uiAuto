@@ -14,13 +14,6 @@ public class WebElementException extends BaseException {
     }
 
     /**
-     * 元素不能点击
-     * */
-    public static WebElementException elementNotClick() {
-        return new WebElementException("元素不能点击");
-    }
-
-    /**
      * 元素不能输入
      * */
     public static WebElementException elementNotInput() {

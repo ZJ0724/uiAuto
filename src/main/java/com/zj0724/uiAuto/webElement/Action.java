@@ -1,8 +1,6 @@
 package com.zj0724.uiAuto.webElement;
 
 import com.zj0724.uiAuto.WebElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 
 public interface Action {
 
@@ -10,6 +8,13 @@ public interface Action {
      * 点击元素
      * */
     void click();
+
+    /**
+     * 点击元素
+     *
+     * @param waitIsClick 是否等待至元素可点击，timeout：10s
+     * */
+    void click(boolean waitIsClick);
 
     /**
      * 输入框输入参数

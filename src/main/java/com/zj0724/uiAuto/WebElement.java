@@ -1,8 +1,10 @@
 package com.zj0724.uiAuto;
 
 import com.zj0724.uiAuto.exception.WebElementException;
+import com.zj0724.uiAuto.exception.WebElementNotClickException;
 import com.zj0724.uiAuto.webElement.Action;
 import org.openqa.selenium.*;
+import java.util.Date;
 
 public class WebElement implements Action {
 
@@ -20,7 +22,33 @@ public class WebElement implements Action {
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
-            throw WebElementException.elementNotClick();
+            throw WebElementNotClickException.getInstance(this);
+        }
+    }
+
+    @Override
+    public void click(boolean waitIsClick) {
+        if (!waitIsClick) {
+            this.click();
+            return;
+        }
+
+        // 开始时间
+        long startTime = new Date().getTime() + 10000L;
+
+        while (true) {
+            // 如果超时时间 < 当前时间时，退出、抛出异常
+            long nowTime = new Date().getTime();
+            if (startTime < nowTime) {
+                throw WebElementNotClickException.getInstance(this);
+            }
+
+            try {
+                this.click();
+                break;
+            } catch (WebElementNotClickException e) {
+                System.out.println("wait element ...");
+            }
         }
     }
 
