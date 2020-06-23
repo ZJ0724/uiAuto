@@ -1,6 +1,7 @@
 package com.zj0724.uiAuto.test;
 
 import com.zj0724.uiAuto.WebDriver;
+import com.zj0724.uiAuto.WebElement;
 import com.zj0724.uiAuto.webDriver.ChromeWebDriver;
 
 public class Test1 {
@@ -13,7 +14,11 @@ public class Test1 {
 
         webDriver.url("file:///C:/Users/ZJ/Desktop/%E4%B8%8B%E8%BD%BD/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/index.html");
 
-        webDriver.findElementByXpath("/html/body/button").click(true);
+        WebElement webElement = webDriver.findElementByXpath("/html/body/button");
+
+//        webDriver.await(6000);
+
+        webElement.click();
 
     }
 

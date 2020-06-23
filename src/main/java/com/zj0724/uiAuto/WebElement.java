@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class WebElement implements Action {
 
-    private org.openqa.selenium.WebElement element = null;
+    private final org.openqa.selenium.WebElement element;
 
     public WebElement() {
         throw WebElementException.elementNotFind();
