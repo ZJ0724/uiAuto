@@ -7,7 +7,7 @@ import com.zj0724.uiauto.webElement.WebElementException;
  *
  * @author ZJ
  * */
-public class WebElementNotClickException extends WebElementException {
+public final class WebElementNotClickException extends WebElementException {
 
     /**
      * 构造函数

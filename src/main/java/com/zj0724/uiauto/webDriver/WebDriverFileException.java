@@ -5,7 +5,7 @@ package com.zj0724.uiauto.webDriver;
  *
  * @author ZJ
  * */
-public class WebDriverFileException extends RuntimeException {
+public final class WebDriverFileException extends RuntimeException {
 
     /**
      * 构造函数

@@ -10,7 +10,7 @@ import java.lang.reflect.*;
  *
  * @author ZJ
  * */
-public class WebElementProxy implements InvocationHandler {
+public final class WebElementProxy implements InvocationHandler {
 
     /** WebElement实体 */
     private final WebElement webElement;
