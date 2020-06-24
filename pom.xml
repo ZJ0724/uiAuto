@@ -8,7 +8,7 @@
     <!--项目信息-->
     <groupId>com.zj0724</groupId>
     <artifactId>uiAuto</artifactId>
-    <version>3.0.0</version>
+    <version>2.3.0</version>
     <packaging>jar</packaging>
 
     <properties>
