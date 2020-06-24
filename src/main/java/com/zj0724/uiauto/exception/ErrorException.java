@@ -1,16 +1,26 @@
 package com.zj0724.uiauto.exception;
 
-public class ErrorException extends BaseException {
+/**
+ * 程序bug异常
+ *
+ * @author ZJ
+ * */
+public final class ErrorException extends RuntimeException {
 
+    /**
+     * 构造函数
+     * */
     private ErrorException(String message) {
         super(message);
     }
 
     /**
-     * 程序出现bug
+     * 获取异常实体
+     *
+     * @return 异常实体
      * */
-    public static ErrorException bug(String message) {
-        return new ErrorException("bug：" + message);
+    public static ErrorException getInstance(String message) {
+        return new ErrorException(message);
     }
 
 }

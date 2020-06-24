@@ -10,6 +10,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 火狐驱动
+ *
+ * @author ZJ
+ * */
 public class FirefoxWebDriver extends BaseWebDriver {
 
     /**
@@ -56,7 +61,7 @@ public class FirefoxWebDriver extends BaseWebDriver {
         try {
             result = new FirefoxDriver(firefoxOptions);
         } catch (IllegalStateException | WebDriverException e) {
-            throw com.zj0724.uiauto.exception.WebDriverException.driverFileError();
+            throw WebDriverFileException.getInstance();
         }
 
         return result;

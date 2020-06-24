@@ -23,7 +23,7 @@ public class BaseWebElement implements WebElement {
     /**
      * 构造方法
      * */
-    public BaseWebElement(org.openqa.selenium.WebElement element, String selector) {
+    protected BaseWebElement(org.openqa.selenium.WebElement element, String selector) {
         this.selector = selector;
         this.element = element;
     }

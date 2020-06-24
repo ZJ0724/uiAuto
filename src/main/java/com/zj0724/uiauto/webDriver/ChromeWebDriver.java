@@ -9,7 +9,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChromeWebDriver extends BaseWebDriver {
+
+/**
+ * 谷歌驱动
+ *
+ * @author ZJ
+ * */
+public final class ChromeWebDriver extends BaseWebDriver {
 
     /***
      * 构造方法
@@ -57,8 +63,8 @@ public class ChromeWebDriver extends BaseWebDriver {
         // 实例化驱动
         try {
             webDriver = new ChromeDriver(chromeOptions);
-        } catch (IllegalStateException | WebDriverException e) {
-            throw com.zj0724.uiauto.exception.WebDriverException.driverFileError();
+        } catch (IllegalStateException | WebDriverFileException e) {
+            throw WebDriverFileException.getInstance();
         }
 
         return webDriver;

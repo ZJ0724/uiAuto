@@ -4,7 +4,6 @@ import com.zj0724.uiauto.WebDriver;
 import com.zj0724.uiauto.exception.ErrorException;
 import com.zj0724.uiauto.exception.GrammarException;
 import com.zj0724.uiauto.webElement.webElementException.WebElementNotFoundException;
-import com.zj0724.uiauto.webElement.BaseWebElement;
 import com.zj0724.uiauto.webElement.WebElementProxy;
 import org.openqa.selenium.*;
 import java.io.File;
@@ -12,21 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 基础驱动类
+ *
+ * @author ZJ
+ * */
 public abstract class BaseWebDriver implements WebDriver {
 
-    /**
-     * 驱动文件
-     * */
+    /** 驱动文件 */
     protected File webDriverFile;
 
-    /**
-     * 是否显示浏览器
-     * */
+    /** 是否显示浏览器 */
     protected boolean headless;
 
-    /**
-     * 驱动
-     */
+    /** 驱动 */
     private org.openqa.selenium.WebDriver webDriver;
 
     /**
@@ -40,6 +38,8 @@ public abstract class BaseWebDriver implements WebDriver {
 
     /**
      * 加载驱动
+     *
+     * @return 驱动
      * */
     protected abstract org.openqa.selenium.WebDriver loadWebDriver();
 
@@ -55,7 +55,7 @@ public abstract class BaseWebDriver implements WebDriver {
     @Override
     public com.zj0724.uiauto.WebElement findElementByCssSelector(String cssSelector) {
         try {
-            return WebElementProxy.getWebElementProxy(new BaseWebElement(webDriver.findElement(By.cssSelector(cssSelector)), cssSelector));
+            return WebElementProxy.getWebElementProxy(webDriver.findElement(By.cssSelector(cssSelector)), cssSelector);
         } catch (InvalidSelectorException e) {
             throw GrammarException.cssGrammarException();
         } catch (NoSuchElementException e) {
@@ -64,12 +64,12 @@ public abstract class BaseWebDriver implements WebDriver {
     }
 
     @Override
-    public List<com.zj0724.uiAuto.WebElement> findElementsByCssSelector(String cssSelector) {
+    public List<com.zj0724.uiauto.WebElement> findElementsByCssSelector(String cssSelector) {
         try {
-            List<com.zj0724.uiAuto.WebElement> result = new ArrayList<>();
+            List<com.zj0724.uiauto.WebElement> result = new ArrayList<>();
             List<org.openqa.selenium.WebElement> elements = webDriver.findElements(By.cssSelector(cssSelector));
             for (org.openqa.selenium.WebElement element : elements) {
-                result.add(WebElementProxy.getWebElementProxy(new BaseWebElement(element, cssSelector)));
+                result.add(WebElementProxy.getWebElementProxy(element, cssSelector));
             }
             return result;
         } catch (InvalidSelectorException e) {
@@ -80,9 +80,9 @@ public abstract class BaseWebDriver implements WebDriver {
     }
 
     @Override
-    public com.zj0724.uiAuto.WebElement findElementByXpath(String xpath) {
+    public com.zj0724.uiauto.WebElement findElementByXpath(String xpath) {
         try {
-            return WebElementProxy.getWebElementProxy(new BaseWebElement(webDriver.findElement(By.xpath(xpath)), xpath));
+            return WebElementProxy.getWebElementProxy(webDriver.findElement(By.xpath(xpath)), xpath);
         } catch (InvalidSelectorException e) {
             throw GrammarException.xpathGrammarException();
         } catch (NoSuchElementException e) {
@@ -91,12 +91,12 @@ public abstract class BaseWebDriver implements WebDriver {
     }
 
     @Override
-    public List<com.zj0724.uiAuto.WebElement> findElementsByXpath(String xpath) {
+    public List<com.zj0724.uiauto.WebElement> findElementsByXpath(String xpath) {
         try {
-            List<com.zj0724.uiAuto.WebElement> result = new ArrayList<>();
+            List<com.zj0724.uiauto.WebElement> result = new ArrayList<>();
             List<org.openqa.selenium.WebElement> elements = webDriver.findElements(By.xpath(xpath));
             for (org.openqa.selenium.WebElement element : elements) {
-                result.add(WebElementProxy.getWebElementProxy(new BaseWebElement(element, xpath)));
+                result.add(WebElementProxy.getWebElementProxy(element, xpath));
             }
             return result;
         } catch (InvalidSelectorException e) {
@@ -111,7 +111,7 @@ public abstract class BaseWebDriver implements WebDriver {
         try {
             Thread.sleep(Millisecond);
         } catch (InterruptedException e) {
-            throw ErrorException.bug(e.getMessage());
+            throw ErrorException.getInstance(e.getMessage());
         }
     }
 

@@ -1,6 +1,6 @@
 package com.zj0724.uiauto.webElement;
 
-import com.zj0724.uiAuto.WebElement;
+import com.zj0724.uiauto.WebElement;
 import com.zj0724.uiauto.exception.ErrorException;
 import com.zj0724.uiauto.webElement.webElementException.WebElementNotFoundException;
 import java.lang.reflect.*;
@@ -32,17 +32,22 @@ public class WebElementProxy implements InvocationHandler {
             } catch (org.openqa.selenium.StaleElementReferenceException throwable) { // 元素失效异常
                 throw WebElementNotFoundException.getInstance(webElement.getSelector());
             } catch (Throwable e1) {
-                throw ErrorException.bug(e1.getMessage());
+                throw ErrorException.getInstance(e1.getMessage());
             }
         }
     }
 
     /**
      * 获取代理增强类对象
+     *
+     * @param element 原始元素
+     * @param selector 选择器
+     *
+     * @return 代理增强WebElement类
      * */
-    public static WebElement getWebElementProxy(WebElement webElement) {
-        WebElementProxy webElementProxy = new WebElementProxy(webElement);
-        return (WebElement) Proxy.newProxyInstance(webElementProxy.getClass().getClassLoader(), webElement.getClass().getInterfaces(), webElementProxy);
+    public static WebElement getWebElementProxy(org.openqa.selenium.WebElement element, String selector) {
+        WebElementProxy webElementProxy = new WebElementProxy(new BaseWebElement(element, selector));
+        return (WebElement) Proxy.newProxyInstance(webElementProxy.getClass().getClassLoader(), WebElement.class.getInterfaces(), webElementProxy);
     }
 
 }

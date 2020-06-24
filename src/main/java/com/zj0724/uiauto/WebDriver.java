@@ -2,6 +2,11 @@ package com.zj0724.uiauto;
 
 import java.util.List;
 
+/**
+ * 驱动接口
+ *
+ * @author ZJ
+ * */
 public interface WebDriver {
 
     /**
