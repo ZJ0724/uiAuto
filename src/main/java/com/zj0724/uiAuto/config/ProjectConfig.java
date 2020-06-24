@@ -1,4 +1,4 @@
-package com.zj0724.uiauto.config;
+package com.zj0724.uiAuto.config;
 
 /**
  * 项目配置

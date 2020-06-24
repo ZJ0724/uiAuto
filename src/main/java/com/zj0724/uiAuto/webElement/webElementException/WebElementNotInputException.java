@@ -1,6 +1,6 @@
-package com.zj0724.uiauto.webElement.webElementException;
+package com.zj0724.uiAuto.webElement.webElementException;
 
-import com.zj0724.uiauto.webElement.WebElementException;
+import com.zj0724.uiAuto.webElement.WebElementException;
 
 /**
  * 元素不能输入异常

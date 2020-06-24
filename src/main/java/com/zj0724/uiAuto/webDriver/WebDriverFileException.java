@@ -1,4 +1,4 @@
-package com.zj0724.uiauto.webDriver;
+package com.zj0724.uiAuto.webDriver;
 
 /**
  * 驱动文件异常

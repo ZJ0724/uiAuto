@@ -1,9 +1,9 @@
-package com.zj0724.uiauto.webElement;
+package com.zj0724.uiAuto.webElement;
 
-import com.zj0724.uiauto.WebElement;
-import com.zj0724.uiauto.webElement.webElementException.WebElementNotClickException;
-import com.zj0724.uiauto.webElement.webElementException.WebElementNotFoundException;
-import com.zj0724.uiauto.webElement.webElementException.WebElementNotInputException;
+import com.zj0724.uiAuto.WebElement;
+import com.zj0724.uiAuto.webElement.webElementException.WebElementNotClickException;
+import com.zj0724.uiAuto.webElement.webElementException.WebElementNotFoundException;
+import com.zj0724.uiAuto.webElement.webElementException.WebElementNotInputException;
 import org.openqa.selenium.*;
 import java.util.Date;
 

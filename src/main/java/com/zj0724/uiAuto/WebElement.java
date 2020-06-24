@@ -1,4 +1,4 @@
-package com.zj0724.uiauto;
+package com.zj0724.uiAuto;
 
 /**
  * WebElement元素

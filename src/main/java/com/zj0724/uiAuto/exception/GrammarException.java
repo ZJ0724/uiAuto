@@ -1,4 +1,4 @@
-package com.zj0724.uiauto.exception;
+package com.zj0724.uiAuto.exception;
 
 /**
  * 语法异常

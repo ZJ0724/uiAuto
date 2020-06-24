@@ -1,7 +1,7 @@
-package com.zj0724.uiauto.webDriver;
+package com.zj0724.uiAuto.webDriver;
 
-import com.zj0724.uiauto.config.ProjectConfig;
-import com.zj0724.uiauto.config.SystemOSConfig;
+import com.zj0724.uiAuto.config.ProjectConfig;
+import com.zj0724.uiAuto.config.SystemOSConfig;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

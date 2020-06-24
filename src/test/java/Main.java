@@ -1,5 +1,5 @@
-import com.zj0724.uiauto.webDriver.ChromeWebDriver;
-import com.zj0724.uiauto.webDriver.FirefoxWebDriver;
+import com.zj0724.uiAuto.webDriver.ChromeWebDriver;
+import com.zj0724.uiAuto.webDriver.FirefoxWebDriver;
 import org.junit.Test;
 
 public class Main {

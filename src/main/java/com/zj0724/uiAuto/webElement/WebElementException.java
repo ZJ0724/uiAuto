@@ -1,4 +1,4 @@
-package com.zj0724.uiauto.webElement;
+package com.zj0724.uiAuto.webElement;
 
 /**
  * 元素异常

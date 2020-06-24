@@ -1,10 +1,10 @@
-package com.zj0724.uiauto.webDriver;
+package com.zj0724.uiAuto.webDriver;
 
-import com.zj0724.uiauto.WebDriver;
-import com.zj0724.uiauto.exception.ErrorException;
-import com.zj0724.uiauto.exception.GrammarException;
-import com.zj0724.uiauto.webElement.webElementException.WebElementNotFoundException;
-import com.zj0724.uiauto.webElement.WebElementProxy;
+import com.zj0724.uiAuto.WebDriver;
+import com.zj0724.uiAuto.exception.ErrorException;
+import com.zj0724.uiAuto.exception.GrammarException;
+import com.zj0724.uiAuto.webElement.webElementException.WebElementNotFoundException;
+import com.zj0724.uiAuto.webElement.WebElementProxy;
 import org.openqa.selenium.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public abstract class BaseWebDriver implements WebDriver {
     }
 
     @Override
-    public com.zj0724.uiauto.WebElement findElementByCssSelector(String cssSelector) {
+    public com.zj0724.uiAuto.WebElement findElementByCssSelector(String cssSelector) {
         try {
             return WebElementProxy.getWebElementProxy(webDriver.findElement(By.cssSelector(cssSelector)), cssSelector);
         } catch (InvalidSelectorException e) {
@@ -64,9 +64,9 @@ public abstract class BaseWebDriver implements WebDriver {
     }
 
     @Override
-    public List<com.zj0724.uiauto.WebElement> findElementsByCssSelector(String cssSelector) {
+    public List<com.zj0724.uiAuto.WebElement> findElementsByCssSelector(String cssSelector) {
         try {
-            List<com.zj0724.uiauto.WebElement> result = new ArrayList<>();
+            List<com.zj0724.uiAuto.WebElement> result = new ArrayList<>();
             List<org.openqa.selenium.WebElement> elements = webDriver.findElements(By.cssSelector(cssSelector));
             for (org.openqa.selenium.WebElement element : elements) {
                 result.add(WebElementProxy.getWebElementProxy(element, cssSelector));
@@ -80,7 +80,7 @@ public abstract class BaseWebDriver implements WebDriver {
     }
 
     @Override
-    public com.zj0724.uiauto.WebElement findElementByXpath(String xpath) {
+    public com.zj0724.uiAuto.WebElement findElementByXpath(String xpath) {
         try {
             return WebElementProxy.getWebElementProxy(webDriver.findElement(By.xpath(xpath)), xpath);
         } catch (InvalidSelectorException e) {
@@ -91,9 +91,9 @@ public abstract class BaseWebDriver implements WebDriver {
     }
 
     @Override
-    public List<com.zj0724.uiauto.WebElement> findElementsByXpath(String xpath) {
+    public List<com.zj0724.uiAuto.WebElement> findElementsByXpath(String xpath) {
         try {
-            List<com.zj0724.uiauto.WebElement> result = new ArrayList<>();
+            List<com.zj0724.uiAuto.WebElement> result = new ArrayList<>();
             List<org.openqa.selenium.WebElement> elements = webDriver.findElements(By.xpath(xpath));
             for (org.openqa.selenium.WebElement element : elements) {
                 result.add(WebElementProxy.getWebElementProxy(element, xpath));
