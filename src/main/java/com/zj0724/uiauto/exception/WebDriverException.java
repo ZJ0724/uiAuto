@@ -1,4 +1,4 @@
-package com.zj0724.uiAuto.exception;
+package com.zj0724.uiauto.exception;
 
 public class WebDriverException extends BaseException {
 

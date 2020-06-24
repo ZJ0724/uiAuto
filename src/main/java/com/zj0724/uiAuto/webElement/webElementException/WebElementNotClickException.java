@@ -1,15 +1,18 @@
-package com.zj0724.uiAuto.exception.webElement;
+package com.zj0724.uiauto.webElement.webElementException;
 
-import com.zj0724.uiAuto.exception.BaseException;
+import com.zj0724.uiauto.webElement.WebElementException;
 
 /**
  * 元素不能点击异常
  *
  * @author ZJ
  * */
-public class WebElementNotClickException extends BaseException {
+public class WebElementNotClickException extends WebElementException {
 
-    protected WebElementNotClickException(String message) {
+    /**
+     * 构造函数
+     * */
+    private WebElementNotClickException(String message) {
         super(message);
     }
 

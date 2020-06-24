@@ -7,8 +7,8 @@
 
     <!--项目信息-->
     <groupId>com.zj0724</groupId>
-    <artifactId>uiAuto</artifactId>
-    <version>2.3.0</version>
+    <artifactId>uiauto</artifactId>
+    <version>3.0.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -78,7 +78,7 @@
 <!--                    <archive>-->
 <!--                        <manifest>-->
 <!--                            <addClasspath>true</addClasspath>-->
-<!--                            <mainClass>com.zj0724.uiAuto.Main</mainClass>-->
+<!--                            <mainClass>com.zj0724.uiauto.Main</mainClass>-->
 <!--                            <classpathPrefix>lib/</classpathPrefix>-->
 <!--                        </manifest>-->
 <!--                    </archive>-->

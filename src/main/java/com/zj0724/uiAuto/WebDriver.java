@@ -1,4 +1,4 @@
-package com.zj0724.uiAuto;
+package com.zj0724.uiauto;
 
 import java.util.List;
 

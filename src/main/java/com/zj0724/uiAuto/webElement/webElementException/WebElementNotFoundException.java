@@ -1,11 +1,13 @@
-package com.zj0724.uiAuto.exception.webElement;
+package com.zj0724.uiauto.webElement.webElementException;
 
-import com.zj0724.uiAuto.exception.BaseException;
+import com.zj0724.uiauto.webElement.WebElementException;
 
 /**
  * 元素未找到异常
+ *
+ * @author ZJ
  * */
-public class WebElementNotFoundException extends BaseException {
+public class WebElementNotFoundException extends WebElementException {
 
     /**
      * 构造函数

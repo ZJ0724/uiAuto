@@ -1,8 +1,8 @@
-package com.zj0724.uiAuto.webElement;
+package com.zj0724.uiauto.webElement;
 
 import com.zj0724.uiAuto.WebElement;
-import com.zj0724.uiAuto.exception.ErrorException;
-import com.zj0724.uiAuto.exception.webElement.WebElementNotFoundException;
+import com.zj0724.uiauto.exception.ErrorException;
+import com.zj0724.uiauto.webElement.webElementException.WebElementNotFoundException;
 import java.lang.reflect.*;
 
 /**

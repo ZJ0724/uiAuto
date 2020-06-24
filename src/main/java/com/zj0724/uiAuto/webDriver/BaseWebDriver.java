@@ -1,11 +1,11 @@
-package com.zj0724.uiAuto.webDriver;
+package com.zj0724.uiauto.webDriver;
 
-import com.zj0724.uiAuto.WebDriver;
-import com.zj0724.uiAuto.exception.ErrorException;
-import com.zj0724.uiAuto.exception.GrammarException;
-import com.zj0724.uiAuto.exception.webElement.WebElementNotFoundException;
-import com.zj0724.uiAuto.webElement.BaseWebElement;
-import com.zj0724.uiAuto.webElement.WebElementProxy;
+import com.zj0724.uiauto.WebDriver;
+import com.zj0724.uiauto.exception.ErrorException;
+import com.zj0724.uiauto.exception.GrammarException;
+import com.zj0724.uiauto.webElement.webElementException.WebElementNotFoundException;
+import com.zj0724.uiauto.webElement.BaseWebElement;
+import com.zj0724.uiauto.webElement.WebElementProxy;
 import org.openqa.selenium.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public abstract class BaseWebDriver implements WebDriver {
     }
 
     @Override
-    public com.zj0724.uiAuto.WebElement findElementByCssSelector(String cssSelector) {
+    public com.zj0724.uiauto.WebElement findElementByCssSelector(String cssSelector) {
         try {
             return WebElementProxy.getWebElementProxy(new BaseWebElement(webDriver.findElement(By.cssSelector(cssSelector)), cssSelector));
         } catch (InvalidSelectorException e) {

@@ -1,7 +1,7 @@
-package com.zj0724.uiAuto.webDriver;
+package com.zj0724.uiauto.webDriver;
 
-import com.zj0724.uiAuto.config.ProjectConfig;
-import com.zj0724.uiAuto.config.SystemOSConfig;
+import com.zj0724.uiauto.config.ProjectConfig;
+import com.zj0724.uiauto.config.SystemOSConfig;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -56,7 +56,7 @@ public class FirefoxWebDriver extends BaseWebDriver {
         try {
             result = new FirefoxDriver(firefoxOptions);
         } catch (IllegalStateException | WebDriverException e) {
-            throw com.zj0724.uiAuto.exception.WebDriverException.driverFileError();
+            throw com.zj0724.uiauto.exception.WebDriverException.driverFileError();
         }
 
         return result;

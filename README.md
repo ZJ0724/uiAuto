@@ -22,7 +22,7 @@ ui自动化框架，基于selenium封装。
 
 > **package：**
 >
-> com.zj0724.uiAuto
+> com.zj0724.uiauto
 
 > **实现类：**
 >
@@ -165,7 +165,7 @@ ui自动化框架，基于selenium封装。
 
 > **package：**
 >
-> com.zj0724.uiAuto
+> com.zj0724.uiauto
 
 > **方法：**
 >

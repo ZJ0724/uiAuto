@@ -1,4 +1,4 @@
-package com.zj0724.uiAuto.config;
+package com.zj0724.uiauto.config;
 
 public enum SystemOSConfig {
 

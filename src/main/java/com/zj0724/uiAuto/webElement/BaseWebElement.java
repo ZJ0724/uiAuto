@@ -1,9 +1,9 @@
-package com.zj0724.uiAuto.webElement;
+package com.zj0724.uiauto.webElement;
 
-import com.zj0724.uiAuto.WebElement;
-import com.zj0724.uiAuto.exception.WebElementException;
-import com.zj0724.uiAuto.exception.webElement.WebElementNotClickException;
-import com.zj0724.uiAuto.exception.webElement.WebElementNotFoundException;
+import com.zj0724.uiauto.WebElement;
+import com.zj0724.uiauto.webElement.webElementException.WebElementNotClickException;
+import com.zj0724.uiauto.webElement.webElementException.WebElementNotFoundException;
+import com.zj0724.uiauto.webElement.webElementException.WebElementNotInputException;
 import org.openqa.selenium.*;
 import java.util.Date;
 
@@ -68,7 +68,7 @@ public class BaseWebElement implements WebElement {
         try {
             this.element.sendKeys(value);
         } catch (ElementNotInteractableException e) {
-            throw WebElementException.elementNotInput();
+            throw WebElementNotInputException.getInstance();
         }
     }
 
