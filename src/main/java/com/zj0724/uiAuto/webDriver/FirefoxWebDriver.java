@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author ZJ
  * */
-public final class FirefoxWebDriver extends BaseWebDriver {
+public final class FirefoxWebDriver extends AbstractWebDriver {
 
     /**
      * 构造函数

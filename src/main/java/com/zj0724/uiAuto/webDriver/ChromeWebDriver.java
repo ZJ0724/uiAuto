@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author ZJ
  * */
-public final class ChromeWebDriver extends BaseWebDriver {
+public final class ChromeWebDriver extends AbstractWebDriver {
 
     /***
      * 构造方法

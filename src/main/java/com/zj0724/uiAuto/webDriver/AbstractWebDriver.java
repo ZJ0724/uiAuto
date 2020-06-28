@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author ZJ
  * */
-public abstract class BaseWebDriver implements WebDriver {
+public abstract class AbstractWebDriver implements WebDriver {
 
     /** 驱动文件 */
     protected File webDriverFile;
@@ -30,7 +30,7 @@ public abstract class BaseWebDriver implements WebDriver {
     /**
      * 构造函数
      * */
-    protected BaseWebDriver(File webDriverFile, boolean headless) {
+    protected AbstractWebDriver(File webDriverFile, boolean headless) {
         this.webDriverFile = webDriverFile;
         this.headless = headless;
         this.setWebDriver();
