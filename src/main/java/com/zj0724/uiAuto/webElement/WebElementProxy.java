@@ -46,8 +46,9 @@ public final class WebElementProxy implements InvocationHandler {
      * @return 代理增强WebElement类
      * */
     public static WebElement getWebElementProxy(org.openqa.selenium.WebElement element, String selector) {
-        WebElementProxy webElementProxy = new WebElementProxy(new BaseWebElement(element, selector));
-        return (WebElement) Proxy.newProxyInstance(webElementProxy.getClass().getClassLoader(), WebElement.class.getInterfaces(), webElementProxy);
+        WebElement webElement = new BaseWebElement(element, selector);
+        WebElementProxy webElementProxy = new WebElementProxy(webElement);
+        return (WebElement) Proxy.newProxyInstance(webElement.getClass().getClassLoader(), webElement.getClass().getInterfaces(), webElementProxy);
     }
 
 }
