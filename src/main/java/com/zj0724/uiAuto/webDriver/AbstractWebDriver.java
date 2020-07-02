@@ -108,7 +108,13 @@ public abstract class AbstractWebDriver implements WebDriver {
 
     @Override
     public com.zj0724.uiAuto.WebElement findElementByText(String text) {
-        return WebElementProxy.getWebElementProxy(this.webDriver.findElement(By.xpath("//*[contains(text(),\"" + text + "\")]")), text);
+        String xpath = "//*[contains(text(),\"" + text + "\")]";
+
+        try {
+            return WebElementProxy.getWebElementProxy(this.webDriver.findElement(By.xpath(xpath)), xpath);
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            throw WebElementNotFoundException.getInstance(xpath);
+        }
     }
 
     @Override
