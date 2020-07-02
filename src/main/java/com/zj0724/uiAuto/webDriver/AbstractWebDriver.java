@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 基础驱动类
+ * 抽象驱动类
  *
  * @author ZJ
  * */
@@ -104,6 +104,11 @@ public abstract class AbstractWebDriver implements WebDriver {
         } catch (NoSuchElementException e) {
             throw WebElementNotFoundException.getInstance(xpath);
         }
+    }
+
+    @Override
+    public com.zj0724.uiAuto.WebElement findElementByText(String text) {
+        return WebElementProxy.getWebElementProxy(this.webDriver.findElement(By.xpath("//*[contains(text(),\"" + text + "\")]")), text);
     }
 
     @Override

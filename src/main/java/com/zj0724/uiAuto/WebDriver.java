@@ -46,6 +46,13 @@ public interface WebDriver {
     List<WebElement> findElementsByXpath(String xpath);
 
     /**
+     * 按照元素文本查找元素
+     *
+     * @param text 元素文本
+     * */
+    WebElement findElementByText(String text);
+
+    /**
      * 线程等待
      *
      * @param Millisecond 要等待的毫秒数

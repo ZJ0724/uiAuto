@@ -1,4 +1,5 @@
 import com.zj0724.uiAuto.WebDriver;
+import com.zj0724.uiAuto.WebElement;
 import com.zj0724.uiAuto.webDriver.ChromeWebDriver;
 
 public class Main {
@@ -7,9 +8,11 @@ public class Main {
 
         WebDriver webDriver = new ChromeWebDriver("E:\\ZJ\\chromeDriver\\83\\chromedriver.exe", false);
 
-        webDriver.url("http://192.168.120.40/swgdfront/#/login");
+        webDriver.url("http://192.168.125.67:8080/kesida_sys/home/netHomeDataInit");
 
-        webDriver.findElementByXpath("//*[@id=\"app\"]/div[1]/div[2]/div/div/form/div[1]/div/input").sendKey("cus_zhoujun01");
+        WebElement webElement = webDriver.findElementByText("确定");
+
+        System.out.println(webElement);
 
     }
 
