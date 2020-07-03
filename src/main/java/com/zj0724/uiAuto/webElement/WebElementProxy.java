@@ -1,7 +1,6 @@
 package com.zj0724.uiAuto.webElement;
 
 import com.zj0724.uiAuto.WebElement;
-import com.zj0724.uiAuto.exception.ErrorException;
 import com.zj0724.uiAuto.webElement.webElementException.WebElementNotFoundException;
 import java.lang.reflect.*;
 
@@ -23,7 +22,7 @@ public final class WebElementProxy implements InvocationHandler {
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) {
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         try {
             return method.invoke(this.webElement, args);
         } catch (UndeclaredThrowableException | IllegalAccessException | InvocationTargetException e) {
@@ -31,8 +30,6 @@ public final class WebElementProxy implements InvocationHandler {
                 throw e.getCause();
             } catch (org.openqa.selenium.StaleElementReferenceException throwable) { // 元素失效异常
                 throw WebElementNotFoundException.getInstance(webElement.getSelector());
-            } catch (Throwable e1) {
-                throw ErrorException.getInstance(e1.getMessage());
             }
         }
     }
