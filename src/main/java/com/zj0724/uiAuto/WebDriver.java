@@ -64,7 +64,7 @@ public interface WebDriver {
      *
      * @param url 要打开的网址
      * */
-    void url(String url);
+    void open(String url);
 
     /**
      * 关闭驱动

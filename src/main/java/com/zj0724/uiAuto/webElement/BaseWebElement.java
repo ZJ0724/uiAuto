@@ -1,65 +1,62 @@
 package com.zj0724.uiAuto.webElement;
 
 import com.zj0724.uiAuto.WebElement;
-import com.zj0724.uiAuto.webElement.webElementException.WebElementNotClickException;
-import com.zj0724.uiAuto.webElement.webElementException.WebElementNotFoundException;
-import com.zj0724.uiAuto.webElement.webElementException.WebElementNotInputException;
+import com.zj0724.uiAuto.exception.WebElementException;
 import org.openqa.selenium.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 基础WebElement实现类
  *
  * @author ZJ
  * */
-public class BaseWebElement implements WebElement {
+public final class BaseWebElement implements WebElement {
 
-    /** 元素 */
+    /**
+     * 元素
+     * */
     private final org.openqa.selenium.WebElement element;
-
-    /** 选择器 */
-    private final String selector;
 
     /**
      * 构造方法
+     *
+     * @param element 元素
      * */
-    protected BaseWebElement(org.openqa.selenium.WebElement element, String selector) {
-        this.selector = selector;
+    public BaseWebElement(org.openqa.selenium.WebElement element) {
         this.element = element;
     }
 
     @Override
     public void click() {
-        try {
-            element.click();
-        } catch (ElementClickInterceptedException e) {
-            throw WebElementNotClickException.getInstance(selector);
-        }
+        this.click(true);
     }
 
     @Override
     public void click(boolean waitIsClick) {
-        if (!waitIsClick) {
-            this.click();
-            return;
+        // 不等待点击元素
+        try {
+            if (!waitIsClick) {
+                this.element.click();
+                return;
+            }
+        } catch (Exception e) {
+            throw new WebElementException("元素不能点击");
         }
 
-        // 开始时间
+        // 等待元素可以点击之后点击
         long startTime = new Date().getTime() + 10000L;
-
         while (true) {
-            // 如果超时时间 < 当前时间时，退出、抛出异常
             long nowTime = new Date().getTime();
             if (startTime < nowTime) {
-                throw WebElementNotClickException.getInstance(selector);
+                throw new WebElementException("元素点击超时");
             }
 
             try {
-                this.click();
+                this.element.click();
                 break;
-            } catch (WebElementNotClickException e) {
-                System.out.println("wait element ...");
-            }
+            } catch (Exception ignored) {}
         }
     }
 
@@ -68,17 +65,16 @@ public class BaseWebElement implements WebElement {
         try {
             this.element.sendKeys(value);
         } catch (ElementNotInteractableException e) {
-            throw WebElementNotInputException.getInstance();
+            throw new WebElementException(e.getMessage());
         }
     }
 
     @Override
     public WebElement parent() {
-        String selector1 = this.selector + "/parent()";
         try {
-            return new BaseWebElement(element.findElement(By.xpath("./..")), selector1);
-        } catch (InvalidSelectorException e) {
-            throw WebElementNotFoundException.getInstance(selector1);
+            return new BaseWebElement(element.findElement(By.xpath("./..")));
+        } catch (Exception e) {
+            throw new WebElementException(e.getMessage());
         }
     }
 
@@ -88,39 +84,29 @@ public class BaseWebElement implements WebElement {
     }
 
     @Override
-    public WebElement children(int index) {
-        String selector1 = this.selector + "/children(" + index + ")";
-
-        if (index == 0) {
-            throw WebElementNotFoundException.getInstance(selector1);
-        }
-
+    public WebElement child(int index) {
         try {
-            return new BaseWebElement(this.element.findElement(By.xpath("./child::*[" + (index) + "]")), selector1);
-        } catch (NoSuchElementException e) {
-            throw WebElementNotFoundException.getInstance(selector1);
+            return new BaseWebElement(this.element.findElement(By.xpath("./child::*[" + (index + 1) + "]")));
+        } catch (Exception e) {
+            throw new WebElementException(e.getMessage());
         }
     }
 
     @Override
     public WebElement next() {
-        String selector1 = this.selector + "/next()";
-
         try {
-            return new BaseWebElement(this.element.findElement(By.xpath("./following-sibling::*[1]")), selector1);
-        } catch (NoSuchElementException e) {
-            throw WebElementNotFoundException.getInstance(selector1);
+            return new BaseWebElement(this.element.findElement(By.xpath("./following-sibling::*[1]")));
+        } catch (Exception e) {
+            throw new WebElementException(e.getMessage());
         }
     }
 
     @Override
     public WebElement prev() {
-        String selector1 = this.selector + "/prev()";
-
         try {
-            return new BaseWebElement(this.element.findElement(By.xpath("./preceding-sibling::*[1]")), selector1);
+            return new BaseWebElement(this.element.findElement(By.xpath("./preceding-sibling::*[1]")));
         } catch (NoSuchElementException e) {
-            throw WebElementNotFoundException.getInstance(selector1);
+            throw new WebElementException(e.getMessage());
         }
     }
 
@@ -135,22 +121,39 @@ public class BaseWebElement implements WebElement {
 
     @Override
     public Integer getChildNumber() {
-        return this.element.findElements(By.xpath("./child::*")).size();
+        return this.children().size();
     }
 
     @Override
     public String getText() {
-        return this.element.getAttribute("innerText");
+        try {
+            return this.element.getAttribute("innerText");
+        } catch (Exception e) {
+            throw new WebElementException(e.getMessage());
+        }
     }
 
     @Override
     public boolean isDisplay() {
-        return this.element.isDisplayed();
+        try {
+            return this.element.isDisplayed();
+        } catch (Exception e) {
+            throw new WebElementException(e.getMessage());
+        }
     }
 
     @Override
-    public String getSelector() {
-        return this.selector;
+    public List<WebElement> children() {
+        try {
+            List<WebElement> result = new ArrayList<>();
+            List<org.openqa.selenium.WebElement> elements = this.element.findElements(By.xpath("./child::*"));
+            for (org.openqa.selenium.WebElement e : elements) {
+                result.add(new BaseWebElement(e));
+            }
+            return result;
+        } catch (Exception e) {
+            throw new WebElementException(e.getMessage());
+        }
     }
 
 }

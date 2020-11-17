@@ -1,7 +1,8 @@
 package com.zj0724.uiAuto.webDriver;
 
-import com.zj0724.uiAuto.config.ProjectConfig;
-import com.zj0724.uiAuto.config.SystemOSConfig;
+import com.zj0724.uiAuto.Storage;
+import com.zj0724.uiAuto.SystemOS;
+import com.zj0724.uiAuto.exception.WebDriverException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,26 +17,59 @@ import java.util.List;
  * */
 public final class ChromeWebDriver extends AbstractWebDriver {
 
+    /**
+     * 驱动文件
+     * */
+    private final File webDriverFile;
+
+    /**
+     * 是否显示浏览器
+     * */
+    private final boolean isShow;
+
     /***
      * 构造方法
+     *
+     * @param webDriverFile 驱动文件
+     * @param isShow 是否显示浏览器
      */
-    public ChromeWebDriver(File webDriverFile, boolean headless) {
-        super(webDriverFile, headless);
+    public ChromeWebDriver(File webDriverFile, boolean isShow) {
+        this.webDriverFile = webDriverFile;
+        this.isShow = isShow;
     }
+
+    /***
+     * 构造方法
+     *
+     * @param webDriverFile 驱动文件
+     */
     public ChromeWebDriver(File webDriverFile) {
-        this(webDriverFile, true);
+        this(webDriverFile, false);
     }
-    public ChromeWebDriver(String webDriverFilePath, boolean headless) {
-        this(new File(webDriverFilePath), headless);
+
+    /***
+     * 构造方法
+     *
+     * @param webDriverFilePath 驱动文件路径
+     * @param isShow 是否显示浏览器
+     */
+    public ChromeWebDriver(String webDriverFilePath, boolean isShow) {
+        this(new File(webDriverFilePath), isShow);
     }
+
+    /***
+     * 构造方法
+     *
+     * @param webDriverFilePath 驱动文件路径
+     */
     public ChromeWebDriver(String webDriverFilePath) {
-        this(webDriverFilePath, true);
+        this(webDriverFilePath, false);
     }
 
     @Override
     protected WebDriver loadWebDriver() {
         // 返回的驱动程序
-        WebDriver webDriver = null;
+        WebDriver webDriver;
         // 谷歌设置
         ChromeOptions chromeOptions = new ChromeOptions();
         // 设置List
@@ -47,12 +81,12 @@ public final class ChromeWebDriver extends AbstractWebDriver {
         options.add("start-maximized");
 
         // windows系统设置headless
-        if (ProjectConfig.SYSTEM_TYPE == SystemOSConfig.WINDOWS) {
-            chromeOptions.setHeadless(this.headless);
+        if (Storage.SYSTEM_OS == SystemOS.WINDOWS) {
+            chromeOptions.setHeadless(!this.isShow);
         }
 
         // linux系统默认设置headless为true，并设置沙盒模式
-        if (ProjectConfig.SYSTEM_TYPE == SystemOSConfig.LINUX) {
+        if (Storage.SYSTEM_OS == SystemOS.WINDOWS) {
             chromeOptions.setHeadless(true);
             options.add("no-sandbox");
         }
@@ -62,8 +96,8 @@ public final class ChromeWebDriver extends AbstractWebDriver {
         // 实例化驱动
         try {
             webDriver = new ChromeDriver(chromeOptions);
-        } catch (IllegalStateException | WebDriverFileException e) {
-            throw WebDriverFileException.getInstance();
+        } catch (Exception e) {
+            throw new WebDriverException(e.getMessage());
         }
 
         return webDriver;

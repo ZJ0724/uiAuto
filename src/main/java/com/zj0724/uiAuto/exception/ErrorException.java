@@ -5,22 +5,24 @@ package com.zj0724.uiAuto.exception;
  *
  * @author ZJ
  * */
-public final class ErrorException extends RuntimeException {
+public final class ErrorException extends Error {
 
     /**
      * 构造函数
+     *
+     * @param message message
      * */
-    private ErrorException(String message) {
+    public ErrorException(String message) {
         super(message);
     }
 
     /**
-     * 获取异常实体
+     * 构造函数
      *
-     * @return 异常实体
+     * @param e 异常
      * */
-    public static ErrorException getInstance(String message) {
-        return new ErrorException(message);
+    public ErrorException(Exception e) {
+        this(e.getMessage());
     }
 
 }

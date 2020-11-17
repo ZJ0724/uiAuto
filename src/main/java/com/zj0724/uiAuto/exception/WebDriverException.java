@@ -1,18 +1,18 @@
 package com.zj0724.uiAuto.exception;
 
 /**
- * 语法异常
+ * 驱动异常
  *
  * @author ZJ
  * */
-public final class GrammarException extends RuntimeException {
+public final class WebDriverException extends RuntimeException {
 
     /**
      * 构造函数
      *
      * @param message message
      * */
-    public GrammarException(String message) {
+    public WebDriverException(String message) {
         super(message);
     }
 

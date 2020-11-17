@@ -8,13 +8,13 @@
     <!--项目信息-->
     <groupId>com.zj0724</groupId>
     <artifactId>uiAuto</artifactId>
-    <version>2.3.0</version>
+    <version>3.0.0</version>
     <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <buildPath>${project.build.directory}/build/${projectName}</buildPath>
+        <buildPath>${project.build.directory}/build/${project.artifactId}</buildPath>
     </properties>
 
     <!--依赖-->
@@ -35,29 +35,10 @@
         </dependency>
     </dependencies>
 
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <properties>
-                <projectName>${project.artifactId}-${project.version}-beta</projectName>
-            </properties>
-            <activation>
-                <!-- 默认选择 -->
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <projectName>${project.artifactId}-${project.version}</projectName>
-            </properties>
-        </profile>
-    </profiles>
-
     <!--编译-->
     <build>
         <!--文件名-->
-        <finalName>${projectName}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <!--插件-->
         <plugins>
             <plugin>
@@ -75,13 +56,13 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-<!--                    <archive>-->
-<!--                        <manifest>-->
-<!--                            <addClasspath>true</addClasspath>-->
-<!--                            <mainClass>com.zj0724.uiAuto.Main</mainClass>-->
-<!--                            <classpathPrefix>lib/</classpathPrefix>-->
-<!--                        </manifest>-->
-<!--                    </archive>-->
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.zj0724.uiAuto.Main</mainClass>
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                    </archive>
                     <outputDirectory>${buildPath}</outputDirectory>
                 </configuration>
             </plugin>

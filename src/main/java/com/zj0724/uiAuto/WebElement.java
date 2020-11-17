@@ -1,5 +1,7 @@
 package com.zj0724.uiAuto;
 
+import java.util.List;
+
 /**
  * WebElement元素
  *
@@ -29,7 +31,7 @@ public interface WebElement {
     /**
      * 获取父级元素
      *
-     * @return 返回父级元素，如果不存在父级元素，抛出元素未找到异常
+     * @return 返回父级元素
      * */
     WebElement parent();
 
@@ -43,11 +45,11 @@ public interface WebElement {
     /**
      * 获取子元素
      *
-     * @param index 元素索引，从1开始
+     * @param index 元素索引，从0开始
      *
-     * @return 返回子元素，如果不存在，抛出元素未找到异常
+     * @return 返回子元素
      * */
-    WebElement children(int index);
+    WebElement child(int index);
 
     /**
      * 获取下一个元素
@@ -65,22 +67,30 @@ public interface WebElement {
 
     /**
      * 获取子元素个数
+     *
+     * @return 子元素个数
      * */
     Integer getChildNumber();
 
     /**
      * 获取元素文本
+     *
+     * @return 元素文本
      * */
     String getText();
 
     /**
      * 元素是否存在
+     *
+     * @return 存在返回true
      * */
     boolean isDisplay();
 
     /**
-     * 获取selector
+     * 获取所有子元素
+     *
+     * @return 所有子元素
      * */
-    String getSelector();
+    List<WebElement> children();
 
 }
