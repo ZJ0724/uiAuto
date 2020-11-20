@@ -1,0 +1,31 @@
+apply plugin: 'java'
+
+group 'com.zj0724'
+version '3.0.0'
+
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+}
+
+ext {
+    resourcePath = buildDir.toString() + '/' + rootProject.name
+}
+
+task buildResource() {
+    copy {
+        from configurations.runtime
+        into rootProject.ext.resourcePath + '/lib'
+    }
+
+    copy {
+        from buildDir.toString() + '/libs'
+        into rootProject.ext.resourcePath
+    }
+}
