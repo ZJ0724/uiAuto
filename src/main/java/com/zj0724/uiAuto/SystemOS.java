@@ -41,7 +41,7 @@ public enum SystemOS {
     public static SystemOS getCurrentSystemOS() {
         String osName = System.getProperty("os.name");
         for (SystemOS systemOS : SystemOS.values()) {
-            if (systemOS.osName.equals(osName)) {
+            if (systemOS.osName.startsWith(osName)) {
                 return systemOS;
             }
         }

@@ -6,6 +6,7 @@ import com.zj0724.uiAuto.exception.GrammarException;
 import com.zj0724.uiAuto.exception.WebElementException;
 import com.zj0724.uiAuto.webElement.BaseWebElement;
 import org.openqa.selenium.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -18,16 +19,30 @@ import java.util.concurrent.TimeUnit;
 public abstract class AbstractWebDriver implements WebDriver {
 
     /**
+     * 驱动文件
+     * */
+    protected final File webDriverFile;
+
+    /**
+     * 是否显示浏览器
+     * */
+    protected final boolean isShow;
+
+    /**
      * 驱动
      * */
     private org.openqa.selenium.WebDriver webDriver;
 
     /**
      * 构造函数
+     *
+     * @param webDriverFile webDriverFile
+     * @param isShow isShow
      * */
-    protected AbstractWebDriver() {
+    protected AbstractWebDriver(File webDriverFile, boolean isShow) {
+        this.webDriverFile = webDriverFile;
+        this.isShow = isShow;
         this.webDriver = this.loadWebDriver();
-
         this.webDriver.manage().window().maximize();
         this.webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }

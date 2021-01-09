@@ -17,16 +17,6 @@ import java.util.List;
  * */
 public final class ChromeWebDriver extends AbstractWebDriver {
 
-    /**
-     * 驱动文件
-     * */
-    private final File webDriverFile;
-
-    /**
-     * 是否显示浏览器
-     * */
-    private final boolean isShow;
-
     /***
      * 构造方法
      *
@@ -34,34 +24,17 @@ public final class ChromeWebDriver extends AbstractWebDriver {
      * @param isShow 是否显示浏览器
      */
     public ChromeWebDriver(File webDriverFile, boolean isShow) {
-        this.webDriverFile = webDriverFile;
-        this.isShow = isShow;
+        super(webDriverFile, isShow);
     }
 
-    /***
-     * 构造方法
-     *
-     * @param webDriverFile 驱动文件
-     */
     public ChromeWebDriver(File webDriverFile) {
         this(webDriverFile, false);
     }
 
-    /***
-     * 构造方法
-     *
-     * @param webDriverFilePath 驱动文件路径
-     * @param isShow 是否显示浏览器
-     */
     public ChromeWebDriver(String webDriverFilePath, boolean isShow) {
         this(new File(webDriverFilePath), isShow);
     }
 
-    /***
-     * 构造方法
-     *
-     * @param webDriverFilePath 驱动文件路径
-     */
     public ChromeWebDriver(String webDriverFilePath) {
         this(webDriverFilePath, false);
     }
