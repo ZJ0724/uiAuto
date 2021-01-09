@@ -59,7 +59,7 @@ public final class ChromeWebDriver extends AbstractWebDriver {
         }
 
         // linux系统默认设置headless为true，并设置沙盒模式
-        if (Storage.SYSTEM_OS == SystemOS.WINDOWS) {
+        if (Storage.SYSTEM_OS == SystemOS.LINUX) {
             chromeOptions.setHeadless(true);
             options.add("no-sandbox");
         }
