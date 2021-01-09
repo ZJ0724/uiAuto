@@ -93,4 +93,9 @@ public interface WebElement {
      * */
     List<WebElement> children();
 
+    /**
+     * 清空输入内容
+     * */
+    void clear();
+
 }

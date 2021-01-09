@@ -156,4 +156,13 @@ public final class BaseWebElement implements WebElement {
         }
     }
 
+    @Override
+    public void clear() {
+        try {
+            this.element.clear();
+        } catch (Exception e) {
+            throw new WebElementException(e.getMessage());
+        }
+    }
+
 }
