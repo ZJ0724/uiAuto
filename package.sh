@@ -1,5 +1,6 @@
 #!/bin/bash
 
+version="3.0.0"
 packagePath=".release"
 name="uiAuto"
 resourcePath="build"
@@ -11,4 +12,4 @@ resourcePath="build"
 rm -rf ${packagePath}
 mkdir ${packagePath}
 
-tar -cvf ${packagePath}/${name}.zip -C ${resourcePath} ${name}
+tar -cvf ${packagePath}/${name}-${version}.zip -C ${resourcePath} ${name}
