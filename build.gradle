@@ -23,9 +23,4 @@ task buildResource() {
         from configurations.runtime
         into rootProject.ext.resourcePath + '/lib'
     }
-
-    copy {
-        from buildDir.toString() + '/libs'
-        into rootProject.ext.resourcePath
-    }
 }

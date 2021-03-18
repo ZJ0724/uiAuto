@@ -1,15 +1,16 @@
 #!/bin/bash
 
 version="3.0.0"
-packagePath=".release"
-name="uiAuto"
-resourcePath="build"
+applicationName="uiAuto"
+buildPath="build"
 
-./gradlew clean
+rm -rf ${buildPath}
 ./gradlew build
 ./gradlew buildResource
 
-rm -rf ${packagePath}
-mkdir ${packagePath}
+mkdir -p ${buildPath}/${applicationName}
+mkdir -p ${buildPath}/${applicationName}/lib
+cp -r build/libs/* ${buildPath}/${applicationName}
+cp -r build/lib/* ${buildPath}/${applicationName}/lib
 
-tar -cvf ${packagePath}/${name}-${version}.zip -C ${resourcePath} ${name}
+tar -cvf ${buildPath}/${applicationName}-${version}.zip -C ${buildPath} ${applicationName}
