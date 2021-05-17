@@ -143,4 +143,10 @@ public abstract class AbstractWebDriver implements WebDriver {
         }
     }
 
+    @Override
+    public void executeScript(String script) {
+        JavascriptExecutor js = (JavascriptExecutor) this.webDriver;
+        js.executeScript(script);
+    }
+
 }

@@ -71,4 +71,11 @@ public interface WebDriver {
      * */
     void close();
 
+    /**
+     * 执行脚本
+     *
+     * @param script script
+     * */
+    void executeScript(String script);
+
 }
