@@ -2,55 +2,25 @@ package com.zj0724.uiAuto;
 
 import java.util.List;
 
-/**
- * 驱动接口
- *
- * @author ZJ
- * */
 public interface WebDriver {
 
     /**
-     * 通过cssSelector查找元素
+     * 查找元素
      *
-     * @param cssSelector css选择器
+     * @param selector selector
      *
-     * @return WebElement 一个元素
+     * @return WebElement
      * */
-    WebElement findElementByCssSelector(String cssSelector);
+    WebElement findElement(Selector selector);
 
     /**
-     * 通过cssSelector查找元素
+     * 查找元素
      *
-     * @param cssSelector css选择器
+     * @param selector selector
      *
-     * @return List<WebElement> 返回一个元素集合
+     * @return WebElement
      * */
-    List<WebElement> findElementsByCssSelector(String cssSelector);
-
-    /**
-     * 通过xpath查找元素
-     *
-     * @param xpath xpath语法
-     *
-     * @return WebElement 返回一个元素
-     * */
-    WebElement findElementByXpath(String xpath);
-
-    /**
-     * 通过xpath查找元素
-     *
-     * @param xpath xpath语法
-     *
-     * @return List<WebElement> 返回一个元素集合
-     * */
-    List<WebElement> findElementsByXpath(String xpath);
-
-    /**
-     * 按照元素文本查找元素
-     *
-     * @param text 元素文本
-     * */
-    WebElement findElementByText(String text);
+    List<WebElement> findElements(Selector selector);
 
     /**
      * 线程等待
@@ -77,5 +47,22 @@ public interface WebDriver {
      * @param script script
      * */
     void executeScript(String script);
+
+    /**
+     * 等待元素出现
+     *
+     * @param selector selector
+     * @param Millisecond 毫秒
+     * */
+    WebElement display(Selector selector, int Millisecond);
+
+    /**
+     * 等待元素出现
+     *
+     * @param selector selector
+     * */
+    default WebElement display(Selector selector) {
+        return display(selector, 60 * 1000);
+    }
 
 }
