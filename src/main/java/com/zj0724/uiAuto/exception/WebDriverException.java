@@ -1,16 +1,19 @@
 package com.zj0724.uiAuto.exception;
 
-public class WebDriverException extends BaseException {
-
-    private WebDriverException(String message) {
-        super(message);
-    }
+/**
+ * 驱动异常
+ *
+ * @author ZJ
+ * */
+public final class WebDriverException extends RuntimeException {
 
     /**
-     * 驱动文件错误
+     * 构造函数
+     *
+     * @param message message
      * */
-    public static WebDriverException driverFileError() {
-        return new WebDriverException("驱动文件错误，如果存在进程，请手动结束掉进程");
+    public WebDriverException(String message) {
+        super(message);
     }
 
 }

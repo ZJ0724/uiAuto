@@ -1,33 +1,16 @@
 #!/bin/bash
 
-# 打包目录
-releasePath="release"
-# 包名
-packageName=""
-# maven打包存放目录
-buildPath="target/build"
-# 当前分支名
-branchName=$(git branch | grep "*")
+version="3.0.0"
+applicationName="uiAuto"
+buildPath="build"
 
-# 清除maven编译目录
-mvn clean
+rm -rf ${buildPath}
+./gradlew build
+./gradlew buildResource
 
-# 根据分支名判断怎么进行打包
-if [ "${branchName}" == "* dev" ]; then
-    mvn package
-else
-    mvn package -P prod
-fi
+mkdir -p ${buildPath}/${applicationName}
+mkdir -p ${buildPath}/${applicationName}/lib
+cp -r build/libs/* ${buildPath}/${applicationName}
+cp -r build/lib/* ${buildPath}/${applicationName}/lib
 
-# 获取包名
-for dirName in $(ls ${buildPath})
-do
-  packageName="${dirName}"
-done
-
-# 删除重新创建打包目录
-rm -rf ${releasePath}
-mkdir ${releasePath}
-
-# 打包
-tar -cvf ${releasePath}/${packageName}.zip -C ${buildPath} ${packageName}
+tar -cvf ${buildPath}/${applicationName}-${version}.zip -C ${buildPath} ${applicationName}

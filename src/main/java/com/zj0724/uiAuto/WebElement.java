@@ -1,101 +1,101 @@
 package com.zj0724.uiAuto;
 
-import com.zj0724.uiAuto.exception.WebElementException;
-import com.zj0724.uiAuto.webElement.Action;
-import org.openqa.selenium.*;
+import java.util.List;
 
-public class WebElement implements Action {
+/**
+ * WebElement元素
+ *
+ * @author ZJ
+ * */
+public interface WebElement {
 
-    private org.openqa.selenium.WebElement element = null;
+    /**
+     * 点击元素
+     * */
+    void click();
 
-    public WebElement() {
-        throw WebElementException.elementNotFind();
-    }
-    public WebElement(org.openqa.selenium.WebElement element) {
-        this.element = element;
-    }
+    /**
+     * 点击元素
+     *
+     * @param waitIsClick 是否等待至元素可点击，timeout：10s
+     * */
+    void click(boolean waitIsClick);
 
-    @Override
-    public void click() {
-        try {
-            element.click();
-        } catch (ElementClickInterceptedException e) {
-            throw WebElementException.elementNotClick();
-        }
-    }
+    /**
+     * 输入框输入参数
+     *
+     * @param value 要输入的参数
+     * */
+    void sendKey(String value);
 
-    @Override
-    public void sendKey(String value) {
-        try {
-            this.element.sendKeys(value);
-        } catch (ElementNotInteractableException e) {
-            throw WebElementException.elementNotInput();
-        }
-    }
+    /**
+     * 获取父级元素
+     *
+     * @return 返回父级元素
+     * */
+    WebElement parent();
 
-    @Override
-    public WebElement parent() {
-        try {
-            return new WebElement(element.findElement(By.xpath("./..")));
-        } catch (InvalidSelectorException e) {
-            return new WebElement();
-        }
-    }
+    /**
+     * 获取元素属性值
+     *
+     * @param name 元素属性名
+     * */
+    String getAttribute(String name);
 
-    @Override
-    public String getAttribute(String name) {
-        return this.element.getAttribute(name);
-    }
+    /**
+     * 获取子元素
+     *
+     * @param index 元素索引，从0开始
+     *
+     * @return 返回子元素
+     * */
+    WebElement child(int index);
 
-    @Override
-    public WebElement children(int index) {
-        if (index == 0) {
-            return new WebElement();
-        }
+    /**
+     * 获取下一个元素
+     *
+     * @return 返回同级下一个元素，如果不存在，抛出元素未找到异常
+     * */
+    WebElement next();
 
-        try {
-            return new WebElement(this.element.findElement(By.xpath("./child::*[" + (index) + "]")));
-        } catch (NoSuchElementException e) {
-            return new WebElement();
-        }
-    }
+    /**
+     * 获取上一个元素
+     *
+     * @return 返回同级上一个元素，如果不存在，抛出元素未找到异常
+     * */
+    WebElement prev();
 
-    @Override
-    public WebElement next() {
-        try {
-            return new WebElement(this.element.findElement(By.xpath("./following-sibling::*[1]")));
-        } catch (NoSuchElementException e) {
-            return new WebElement();
-        }
-    }
+    /**
+     * 获取子元素个数
+     *
+     * @return 子元素个数
+     * */
+    Integer getChildNumber();
 
-    @Override
-    public WebElement prev() {
-        try {
-            return new WebElement(this.element.findElement(By.xpath("./preceding-sibling::*[1]")));
-        } catch (NoSuchElementException e) {
-            return new WebElement();
-        }
-    }
+    /**
+     * 获取元素文本
+     *
+     * @return 元素文本
+     * */
+    String getText();
 
-    @Override
-    public String toString() {
-        return this.element.toString();
-    }
+    /**
+     * 元素是否存在
+     *
+     * @return 存在返回true
+     * */
+    boolean isDisplay();
 
-    @Override
-    public Integer getChildNumber() {
-        return this.element.findElements(By.xpath("./child::*")).size();
-    }
+    /**
+     * 获取所有子元素
+     *
+     * @return 所有子元素
+     * */
+    List<WebElement> children();
 
-    @Override
-    public String getText() {
-        return this.element.getAttribute("innerText");
-    }
-
-    @Override
-    public boolean isDisplay() {
-        return this.element.isDisplayed();
-    }
+    /**
+     * 清空输入内容
+     * */
+    void clear();
 
 }

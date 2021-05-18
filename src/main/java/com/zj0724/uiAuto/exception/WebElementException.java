@@ -1,30 +1,19 @@
 package com.zj0724.uiAuto.exception;
 
-public class WebElementException extends BaseException {
+/**
+ * 元素异常
+ *
+ * @author ZJ
+ * */
+public final class WebElementException extends RuntimeException {
 
-    private WebElementException(String message){
+    /**
+     * 构造函数
+     *
+     * @param message message
+     * */
+    public WebElementException(String message) {
         super(message);
-    }
-
-    /**
-     * 元素未找到
-     * */
-    public static WebElementException elementNotFind() {
-        return new WebElementException("元素未找到");
-    }
-
-    /**
-     * 元素不能点击
-     * */
-    public static WebElementException elementNotClick() {
-        return new WebElementException("元素不能点击");
-    }
-
-    /**
-     * 元素不能输入
-     * */
-    public static WebElementException elementNotInput() {
-        return new WebElementException("元素不能输入");
     }
 
 }
