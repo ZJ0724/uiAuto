@@ -53,6 +53,8 @@ public interface WebDriver {
      *
      * @param selector selector
      * @param Millisecond 毫秒
+     *
+     * @return WebElement
      * */
     WebElement display(Selector selector, int Millisecond);
 
@@ -60,6 +62,8 @@ public interface WebDriver {
      * 等待元素出现
      *
      * @param selector selector
+     *
+     * @return WebElement
      * */
     default WebElement display(Selector selector) {
         return display(selector, 60 * 1000);
