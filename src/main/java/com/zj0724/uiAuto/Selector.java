@@ -19,7 +19,9 @@ public abstract class Selector {
         this.select = select;
     }
 
-    public abstract List<WebElement> getWebElements(WebDriver webDriver);
+    public abstract List<WebElement> getWebElements(WebDriver seleniumWebDriver, com.zj0724.uiAuto.WebDriver webDriver);
+
+    public abstract String getJsElement();
 
     public String getSelect() {
         return select;

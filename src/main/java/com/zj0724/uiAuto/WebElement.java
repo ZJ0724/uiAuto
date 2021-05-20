@@ -98,4 +98,11 @@ public interface WebElement {
      * */
     void clear();
 
+    /**
+     * 触发事件
+     *
+     * @param event 事件名
+     * */
+    void event(String event);
+
 }

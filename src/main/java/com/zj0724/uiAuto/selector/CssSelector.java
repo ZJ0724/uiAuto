@@ -21,17 +21,22 @@ public final class CssSelector extends Selector {
     }
 
     @Override
-    public List<WebElement> getWebElements(WebDriver webDriver) {
+    public List<WebElement> getWebElements(WebDriver seleniumWebDriver, com.zj0724.uiAuto.WebDriver webDriver) {
         try {
             List<WebElement> result = new ArrayList<>();
-            List<org.openqa.selenium.WebElement> elements = webDriver.findElements(By.cssSelector(this.getSelect()));
+            List<org.openqa.selenium.WebElement> elements = seleniumWebDriver.findElements(By.cssSelector(this.getSelect()));
             for (org.openqa.selenium.WebElement element : elements) {
-                result.add(new BaseWebElement(element));
+                result.add(new BaseWebElement(element, this, webDriver));
             }
             return result;
         } catch (Exception e) {
             throw new WebElementException(e.getMessage());
         }
+    }
+
+    @Override
+    public String getJsElement() {
+        return "document.querySelector('" + this.getSelect() + "')";
     }
 
 }

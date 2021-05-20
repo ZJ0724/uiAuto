@@ -21,17 +21,22 @@ public final class TextSelector extends Selector {
     }
 
     @Override
-    public List<WebElement> getWebElements(WebDriver webDriver) {
+    public List<WebElement> getWebElements(WebDriver seleniumWebDriver, com.zj0724.uiAuto.WebDriver webDriver) {
         try {
             List<WebElement> result = new ArrayList<>();
-            List<org.openqa.selenium.WebElement> elements = webDriver.findElements(By.xpath("//*[contains(text(),\"" + this.getSelect() + "\")]"));
+            List<org.openqa.selenium.WebElement> elements = seleniumWebDriver.findElements(By.xpath("//*[contains(text(),\"" + this.getSelect() + "\")]"));
             for (org.openqa.selenium.WebElement element : elements) {
-                result.add(new BaseWebElement(element));
+                result.add(new BaseWebElement(element, this, webDriver));
             }
             return result;
         } catch (Exception e) {
             throw new WebElementException(e.getMessage());
         }
+    }
+
+    @Override
+    public String getJsElement() {
+        return "document.evaluate('//*[contains(text(), \"" + this.getSelect() + "\")]', document).iterateNext()";
     }
 
 }

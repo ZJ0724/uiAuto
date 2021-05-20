@@ -1,31 +1,24 @@
 import com.zj0724.uiAuto.Selector;
 import com.zj0724.uiAuto.WebDriver;
-import com.zj0724.uiAuto.WebElement;
 import com.zj0724.uiAuto.webDriver.ChromeWebDriver;
 
 public class Test1 {
 
     public static void main(String[] args) {
-        WebDriver webDriver = new ChromeWebDriver("D:\\application\\ep-util\\chromedriver\\chromedriver.exe",true);
+        WebDriver chromeDriver = new ChromeWebDriver("C:\\Users\\ZJ\\Desktop\\file\\chromedriver_win32\\chromedriver.exe", true);
+
         try {
-            webDriver.open("http://192.168.120.40/uumm/#/login");
-            webDriver.findElement(Selector.byCssSelector("#app > div.home > section.home-banner > div > div.login-block > div > form > div:nth-child(1) > div > div > input")).sendKey("rnlin");
-            webDriver.findElement(Selector.byCssSelector("#app > div.home > section.home-banner > div > div.login-block > div > form > div:nth-child(2) > div > div > input")).sendKey("888888a");
-            webDriver.findElement(Selector.byCssSelector("#app > div.home > section.home-banner > div > div.login-block > div > form > div:nth-child(3) > div > div > div:nth-child(1) > div > input")).sendKey("1");
-            webDriver.findElement(Selector.byCssSelector("#app > div.home > section.home-banner > div > div.login-block > div > div:nth-child(3) > button")).click();
-            webDriver.await(5000);
-            webDriver.open("http://192.168.120.40/uumm/#/chunk/ossUser/EC9925E930DE4E6EBD17F6F8951FCB56?id=EC9925E930DE4E6EBD17F6F8951FCB56");
-            webDriver.findElement(Selector.byCssSelector("#app > div:nth-child(1) > div.panel-main > div.panel-main-content > div > div > div:nth-child(3) > div > div.uumm-base-cv-main > div > div > div.ep-tabs-contents > div > div > div > div.ep-row > div > button.ep-button.ep-button--primary.ep-button--small")).click();
-            webDriver.findElement(Selector.byCssSelector("#app > div:nth-child(1) > div.panel-main > div.panel-main-content > div > div > div:nth-child(3) > div > div.uumm-base-cv-main > div > div > div.ep-tabs-contents > div > div > div > div.ep-model-wrapper.ep-modal-wrapper > div > div.ep-model-body.ep-modal-body > div.panel-main-content > div > div > div.uumm-base-cv-main > div:nth-child(5) > div > div.jsoneditor-vue > div > div.jsoneditor-menu > div > button")).click();
-            webDriver.findElement(Selector.byCssSelector("#app > div:nth-child(1) > div.panel-main > div.panel-main-content > div > div > div:nth-child(3) > div > div.uumm-base-cv-main > div > div > div.ep-tabs-contents > div > div > div > div.ep-model-wrapper.ep-modal-wrapper > div > div.ep-model-body.ep-modal-body > div.panel-main-content > div > div > div.uumm-base-cv-main > div:nth-child(5) > div > div.jsoneditor-vue > div > div.jsoneditor-menu > div > div > div > ul > li:nth-child(5) > button")).click();
-//            final WebElement element = webDriver.findElement(Selector.byCssSelector("#app > div:nth-child(1) > div.panel-main > div.panel-main-content > div > div > div:nth-child(3) > div > div.uumm-base-cv-main > div > div > div.ep-tabs-contents > div > div > div > div.ep-model-wrapper.ep-modal-wrapper > div > div.ep-model-body.ep-modal-body > div.panel-main-content > div > div > div.uumm-base-cv-main > div:nth-child(5) > div > div.jsoneditor-vue > div > div.jsoneditor-outer > div > div.ace_scroller > div"));
-//            element.test();
-            WebElement element = webDriver.findElement(Selector.byCssSelector("#app > div:nth-child(1) > div.panel-main > div.panel-main-content > div > div > div:nth-child(3) > div > div.uumm-base-cv-main > div > div > div.ep-tabs-contents > div > div > div > div.ep-model-wrapper.ep-modal-wrapper > div > div.ep-model-body.ep-modal-body > div.panel-main-content > div > div > div.uumm-base-cv-main > div:nth-child(5) > div > div.jsoneditor-vue > div > div.jsoneditor-outer > textarea"));
-            element.clear();
-            element.sendKey("{\"test\":\"123\"}");
-//            webDriver.findElement(Selector.byCssSelector("#app > div:nth-child(1) > div.panel-main > div.panel-main-content > div > div > div:nth-child(3) > div > div.uumm-base-cv-main > div > div > div.ep-tabs-contents > div > div > div > div.ep-model-wrapper.ep-modal-wrapper > div > div.ep-model-body.ep-modal-body > div.panel-main-content > div > div > div.uumm-base-cv-main > div:nth-child(5) > div > div.jsoneditor-vue > div > div.jsoneditor-outer > textarea")).sendKey();
+            chromeDriver.open("http://192.168.120.40/uumm/#/login");
+            chromeDriver.findElement(Selector.byCssSelector("#app > div.home > section.home-banner > div > div.login-block > div > form > div:nth-child(1) > div > div > input")).sendKey("rnlin");
+            chromeDriver.findElement(Selector.byCssSelector("#app > div.home > section.home-banner > div > div.login-block > div > form > div:nth-child(2) > div > div > input")).sendKey("888888a");
+            chromeDriver.findElement(Selector.byCssSelector("#app > div.home > section.home-banner > div > div.login-block > div > form > div:nth-child(3) > div > div > div:nth-child(1) > div > input")).sendKey("a");
+            chromeDriver.findElement(Selector.byCssSelector("#app > div.home > section.home-banner > div > div.login-block > div > div:nth-child(3) > button")).click();
+            chromeDriver.display(Selector.byCssSelector("#app > div:nth-child(1) > div.panel-main > div.panel-main-content > div.ep-row > div.resetw-col7.ep-col.ep-col-7 > div > div.title"));
+            chromeDriver.open("http://192.168.120.40/uumm/#/chunk/ossUser/%E6%96%B0%E5%A2%9E%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7?id=%E6%96%B0%E5%A2%9E%E7%BD%91%E7%AB%99%E7%94%A8%E6%88%B7");
+            chromeDriver.findElement(Selector.byCssSelector("#app > div:nth-child(1) > div.panel-main > div.panel-main-content > div > div > div.uumm-base-cv-main > div > div:nth-child(4) > form > div:nth-child(1) > div:nth-child(1) > div > div > div > div.ep-input.ep-input--mini > input")).sendKey("test");
+            chromeDriver.findElement(Selector.byCssSelector("#app > div:nth-child(1) > div.panel-main > div.panel-main-content > div > div > div.uumm-base-cv-main > div > div:nth-child(4) > form > div:nth-child(1) > div:nth-child(1) > div > div > div > div.ep-input.ep-input--mini > input")).event("input");
         } finally {
-            webDriver.close();
+            chromeDriver.close();
         }
     }
 

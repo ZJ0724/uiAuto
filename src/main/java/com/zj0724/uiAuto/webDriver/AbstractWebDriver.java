@@ -60,7 +60,7 @@ public abstract class AbstractWebDriver implements WebDriver {
 
     @Override
     public List<com.zj0724.uiAuto.WebElement> findElements(Selector selector) {
-        List<com.zj0724.uiAuto.WebElement> webElements = selector.getWebElements(this.webDriver);
+        List<com.zj0724.uiAuto.WebElement> webElements = selector.getWebElements(this.webDriver, this);
         if (webElements.size() == 0) {
             throw new WebElementException("元素未找到：" + selector.getSelect());
         }
