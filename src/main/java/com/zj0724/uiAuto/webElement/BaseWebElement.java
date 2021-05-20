@@ -72,9 +72,14 @@ public final class BaseWebElement implements WebElement {
         try {
             this.element.sendKeys(value);
         } catch (Exception e) {
-            String js = selector.getJsElement() + ".value = '" + value + "';";
-            webDriver.executeScript(js);
+            throw new WebElementException(e.getMessage());
         }
+    }
+
+    @Override
+    public void sendKeyByJs(String value) {
+        String js = selector.getJsElement() + ".value = '" + value + "';";
+        webDriver.executeScript(js);
     }
 
     @Override
@@ -179,7 +184,6 @@ public final class BaseWebElement implements WebElement {
                 "let event = document.createEvent(\"HTMLEvents\");\n" +
                 "event.initEvent(\"" + event + "\", false, true);\n" +
                 "element.dispatchEvent(event);";
-        System.out.println(js);
         webDriver.executeScript(js);
     }
 

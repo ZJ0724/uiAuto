@@ -29,6 +29,13 @@ public interface WebElement {
     void sendKey(String value);
 
     /**
+     * 通过js输入
+     *
+     * @param value 要输入的参数
+     * */
+    void sendKeyByJs(String value);
+
+    /**
      * 获取父级元素
      *
      * @return 返回父级元素
