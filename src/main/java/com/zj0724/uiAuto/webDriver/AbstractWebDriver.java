@@ -30,7 +30,7 @@ public abstract class AbstractWebDriver implements WebDriver {
     /**
      * 驱动
      * */
-    private org.openqa.selenium.WebDriver webDriver;
+    private org.openqa.selenium.WebDriver seleniumWebDriver;
 
     /**
      * 构造函数
@@ -41,9 +41,9 @@ public abstract class AbstractWebDriver implements WebDriver {
     protected AbstractWebDriver(File webDriverFile, boolean isShow) {
         this.webDriverFile = webDriverFile;
         this.isShow = isShow;
-        this.webDriver = this.loadWebDriver();
-        this.webDriver.manage().window().maximize();
-        this.webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        this.seleniumWebDriver = this.loadWebDriver();
+        this.seleniumWebDriver.manage().window().maximize();
+        this.seleniumWebDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     /**
@@ -54,17 +54,22 @@ public abstract class AbstractWebDriver implements WebDriver {
     protected abstract org.openqa.selenium.WebDriver loadWebDriver();
 
     @Override
-    public com.zj0724.uiAuto.WebElement findElement(Selector selector) {
-        return findElements(selector).get(0);
+    public org.openqa.selenium.WebDriver getSeleniumWebDriver() {
+        return seleniumWebDriver;
     }
 
     @Override
     public List<com.zj0724.uiAuto.WebElement> findElements(Selector selector) {
-        List<com.zj0724.uiAuto.WebElement> webElements = selector.getWebElements(this.webDriver, this);
+        List<com.zj0724.uiAuto.WebElement> webElements = selector.getWebElements(this);
         if (webElements.size() == 0) {
             throw new WebElementException("元素未找到：" + selector.getSelect());
         }
         return webElements;
+    }
+
+    @Override
+    public com.zj0724.uiAuto.WebElement findElement(Selector selector) {
+        return findElements(selector).get(0);
     }
 
     @Override
@@ -79,7 +84,7 @@ public abstract class AbstractWebDriver implements WebDriver {
     @Override
     public void open(String url) {
         try {
-            this.webDriver.get(url);
+            this.seleniumWebDriver.get(url);
         } catch (InvalidArgumentException e) {
             throw new GrammarException(e.getMessage());
         }
@@ -87,15 +92,15 @@ public abstract class AbstractWebDriver implements WebDriver {
 
     @Override
     public void close() {
-        if (this.webDriver != null) {
-            this.webDriver.quit();
-            this.webDriver = null;
+        if (this.seleniumWebDriver != null) {
+            this.seleniumWebDriver.quit();
+            this.seleniumWebDriver = null;
         }
     }
 
     @Override
     public void executeScript(String script) {
-        JavascriptExecutor js = (JavascriptExecutor) this.webDriver;
+        JavascriptExecutor js = (JavascriptExecutor) this.seleniumWebDriver;
         js.executeScript(script);
     }
 

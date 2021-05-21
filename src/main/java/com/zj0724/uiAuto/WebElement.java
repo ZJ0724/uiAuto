@@ -1,5 +1,6 @@
 package com.zj0724.uiAuto;
 
+import org.openqa.selenium.Keys;
 import java.util.List;
 
 /**
@@ -27,6 +28,13 @@ public interface WebElement {
      * @param value 要输入的参数
      * */
     void sendKey(String value);
+
+    /**
+     * 输入框输入参数
+     *
+     * @param keys keys
+     * */
+    void sendKey(Keys keys);
 
     /**
      * 通过js输入
@@ -111,5 +119,12 @@ public interface WebElement {
      * @param event 事件名
      * */
     void event(String event);
+
+    /**
+     * 获取元素标签名
+     *
+     * @return 元素标签名
+     * */
+    String getTagName();
 
 }

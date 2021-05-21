@@ -77,18 +77,27 @@ public final class BaseWebElement implements WebElement {
     }
 
     @Override
+    public void sendKey(Keys keys) {
+        try {
+            this.element.sendKeys(keys);
+        } catch (Exception e) {
+            throw new WebElementException(e.getMessage());
+        }
+    }
+
+    @Override
     public void sendKeyByJs(String value) {
-        String js = selector.getJsElement() + ".value = '" + value + "';";
+        String js = selector.getJsDocument() + ".value = '" + value + "';";
         webDriver.executeScript(js);
     }
 
     @Override
     public WebElement parent() {
-        try {
-            return new BaseWebElement(element.findElement(By.xpath("./..")), selector, webDriver);
-        } catch (Exception e) {
-            throw new WebElementException(e.getMessage());
+        List<WebElement> webElements = this.selector.getParent().getWebElements(this.webDriver);
+        if (webElements.size() == 0) {
+            throw new WebElementException("元素未找到: " + this.selector.getSelect());
         }
+        return webElements.get(0);
     }
 
     @Override
@@ -98,29 +107,27 @@ public final class BaseWebElement implements WebElement {
 
     @Override
     public WebElement child(int index) {
-        try {
-            return new BaseWebElement(this.element.findElement(By.xpath("./child::*[" + (index + 1) + "]")), selector, webDriver);
-        } catch (Exception e) {
-            throw new WebElementException(e.getMessage());
-        }
+        return children().get(index);
     }
 
     @Override
     public WebElement next() {
-        try {
-            return new BaseWebElement(this.element.findElement(By.xpath("./following-sibling::*[1]")), selector, webDriver);
-        } catch (Exception e) {
-            throw new WebElementException(e.getMessage());
+        Selector next = this.selector.getNext();
+        List<WebElement> webElements = next.getWebElements(webDriver);
+        if (webElements.size() == 0) {
+            throw new WebElementException("元素未找到: " + next.getSelect());
         }
+        return webElements.get(0);
     }
 
     @Override
     public WebElement prev() {
-        try {
-            return new BaseWebElement(this.element.findElement(By.xpath("./preceding-sibling::*[1]")), selector, webDriver);
-        } catch (NoSuchElementException e) {
-            throw new WebElementException(e.getMessage());
+        Selector prev = this.selector.getPrev();
+        List<WebElement> webElements = prev.getWebElements(webDriver);
+        if (webElements.size() == 0) {
+            throw new WebElementException("元素未找到: " + prev.getSelect());
         }
+        return webElements.get(0);
     }
 
     @Override
@@ -157,16 +164,12 @@ public final class BaseWebElement implements WebElement {
 
     @Override
     public List<WebElement> children() {
-        try {
-            List<WebElement> result = new ArrayList<>();
-            List<org.openqa.selenium.WebElement> elements = this.element.findElements(By.xpath("./child::*"));
-            for (org.openqa.selenium.WebElement e : elements) {
-                result.add(new BaseWebElement(e, selector, webDriver));
-            }
-            return result;
-        } catch (Exception e) {
-            throw new WebElementException(e.getMessage());
+        List<WebElement> result = new ArrayList<>();
+        List<Selector> children = this.selector.getChildren();
+        for (Selector selector : children) {
+            result.add(selector.getWebElements(webDriver).get(0));
         }
+        return result;
     }
 
     @Override
@@ -180,11 +183,16 @@ public final class BaseWebElement implements WebElement {
 
     @Override
     public void event(String event) {
-        String js = "let element = " + selector.getJsElement() + ";\n" +
+        String js = "let element = " + selector.getJsDocument() + ";\n" +
                 "let event = document.createEvent(\"HTMLEvents\");\n" +
                 "event.initEvent(\"" + event + "\", false, true);\n" +
                 "element.dispatchEvent(event);";
         webDriver.executeScript(js);
+    }
+
+    @Override
+    public String getTagName() {
+        return this.element.getTagName();
     }
 
 }

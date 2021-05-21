@@ -5,13 +5,11 @@ import java.util.List;
 public interface WebDriver {
 
     /**
-     * 查找元素
+     * 获取SeleniumWebDriver
      *
-     * @param selector selector
-     *
-     * @return WebElement
+     * @return org.openqa.selenium.WebDriver
      * */
-    WebElement findElement(Selector selector);
+    org.openqa.selenium.WebDriver getSeleniumWebDriver();
 
     /**
      * 查找元素
@@ -21,6 +19,15 @@ public interface WebDriver {
      * @return WebElement
      * */
     List<WebElement> findElements(Selector selector);
+
+    /**
+     * 查找元素
+     *
+     * @param selector selector
+     *
+     * @return WebElement
+     * */
+    WebElement findElement(Selector selector);
 
     /**
      * 线程等待
