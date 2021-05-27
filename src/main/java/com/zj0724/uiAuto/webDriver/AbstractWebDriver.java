@@ -6,60 +6,31 @@ import com.zj0724.uiAuto.exception.ErrorException;
 import com.zj0724.uiAuto.exception.GrammarException;
 import com.zj0724.uiAuto.exception.WebElementException;
 import org.openqa.selenium.*;
-import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 抽象驱动类
+ * AbstractWebDriver
  *
  * @author ZJ
  * */
 public abstract class AbstractWebDriver implements WebDriver {
 
-    /**
-     * 驱动文件
-     * */
-    protected final File webDriverFile;
-
-    /**
-     * 是否显示浏览器
-     * */
-    protected final boolean isShow;
-
-    /**
-     * 驱动
-     * */
     private org.openqa.selenium.WebDriver seleniumWebDriver;
 
-    /**
-     * 构造函数
-     *
-     * @param webDriverFile webDriverFile
-     * @param isShow isShow
-     * */
-    protected AbstractWebDriver(File webDriverFile, boolean isShow) {
-        this.webDriverFile = webDriverFile;
-        this.isShow = isShow;
-        this.seleniumWebDriver = this.loadWebDriver();
+    protected AbstractWebDriver(org.openqa.selenium.WebDriver webDriver) {
+        this.seleniumWebDriver = webDriver;
         this.seleniumWebDriver.manage().window().maximize();
         this.seleniumWebDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
-    /**
-     * 加载驱动
-     *
-     * @return 驱动
-     * */
-    protected abstract org.openqa.selenium.WebDriver loadWebDriver();
-
     @Override
-    public org.openqa.selenium.WebDriver getSeleniumWebDriver() {
+    public final org.openqa.selenium.WebDriver getSeleniumWebDriver() {
         return seleniumWebDriver;
     }
 
     @Override
-    public List<com.zj0724.uiAuto.WebElement> findElements(Selector selector) {
+    public final List<com.zj0724.uiAuto.WebElement> findElements(Selector selector) {
         List<com.zj0724.uiAuto.WebElement> webElements = selector.getWebElements(this);
         if (webElements.size() == 0) {
             throw new WebElementException("元素未找到：" + selector.getSelect());
@@ -68,12 +39,12 @@ public abstract class AbstractWebDriver implements WebDriver {
     }
 
     @Override
-    public com.zj0724.uiAuto.WebElement findElement(Selector selector) {
+    public final com.zj0724.uiAuto.WebElement findElement(Selector selector) {
         return findElements(selector).get(0);
     }
 
     @Override
-    public void await(int Millisecond) {
+    public final void await(int Millisecond) {
         try {
             Thread.sleep(Millisecond);
         } catch (InterruptedException e) {
@@ -82,7 +53,7 @@ public abstract class AbstractWebDriver implements WebDriver {
     }
 
     @Override
-    public void open(String url) {
+    public final void open(String url) {
         try {
             this.seleniumWebDriver.get(url);
         } catch (InvalidArgumentException e) {
@@ -91,7 +62,7 @@ public abstract class AbstractWebDriver implements WebDriver {
     }
 
     @Override
-    public void close() {
+    public final void close() {
         if (this.seleniumWebDriver != null) {
             this.seleniumWebDriver.quit();
             this.seleniumWebDriver = null;
@@ -99,13 +70,13 @@ public abstract class AbstractWebDriver implements WebDriver {
     }
 
     @Override
-    public void executeScript(String script) {
+    public final void executeScript(String script) {
         JavascriptExecutor js = (JavascriptExecutor) this.seleniumWebDriver;
         js.executeScript(script);
     }
 
     @Override
-    public com.zj0724.uiAuto.WebElement display(Selector selector, int Millisecond) {
+    public final com.zj0724.uiAuto.WebElement display(Selector selector, int Millisecond) {
         return display(selector, Millisecond, System.currentTimeMillis());
     }
 

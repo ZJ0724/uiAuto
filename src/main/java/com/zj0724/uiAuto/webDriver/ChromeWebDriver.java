@@ -17,14 +17,8 @@ import java.util.List;
  * */
 public final class ChromeWebDriver extends AbstractWebDriver {
 
-    /***
-     * 构造方法
-     *
-     * @param webDriverFile 驱动文件
-     * @param isShow 是否显示浏览器
-     */
     public ChromeWebDriver(File webDriverFile, boolean isShow) {
-        super(webDriverFile, isShow);
+        super(getWebDriver(webDriverFile, isShow));
     }
 
     public ChromeWebDriver(File webDriverFile) {
@@ -39,8 +33,11 @@ public final class ChromeWebDriver extends AbstractWebDriver {
         this(webDriverFilePath, false);
     }
 
-    @Override
-    protected WebDriver loadWebDriver() {
+    private static WebDriver getWebDriver(File webDriverFile, boolean isShow) {
+        if (webDriverFile == null) {
+            throw new WebDriverException("文件不能为空");
+        }
+
         // 返回的驱动程序
         WebDriver webDriver;
         // 谷歌设置
@@ -48,14 +45,14 @@ public final class ChromeWebDriver extends AbstractWebDriver {
         // 设置List
         List<String> options = new ArrayList<>();
 
-        System.setProperty("webdriver.chrome.driver", this.webDriverFile.getAbsolutePath());
+        System.setProperty("webdriver.chrome.driver", webDriverFile.getAbsolutePath());
 
         // 设置浏览器最大化
         options.add("start-maximized");
 
         // windows系统设置headless
         if (Storage.SYSTEM_OS == SystemOS.WINDOWS) {
-            chromeOptions.setHeadless(!this.isShow);
+            chromeOptions.setHeadless(!isShow);
         }
 
         // linux系统默认设置headless为true，并设置沙盒模式

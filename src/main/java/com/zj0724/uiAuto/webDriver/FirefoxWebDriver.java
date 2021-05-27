@@ -17,14 +17,8 @@ import java.util.List;
  * */
 public final class FirefoxWebDriver extends AbstractWebDriver {
 
-    /**
-     * 构造函数
-     *
-     * @param webDriverFile 驱动文件
-     * @param isShow 是否显示浏览器
-     * */
     public FirefoxWebDriver(File webDriverFile, boolean isShow) {
-        super(webDriverFile, isShow);
+        super(getWebDriver(webDriverFile, isShow));
     }
 
     public FirefoxWebDriver(File webDriverFile) {
@@ -39,8 +33,7 @@ public final class FirefoxWebDriver extends AbstractWebDriver {
         this(webDriverFilePath, false);
     }
 
-    @Override
-    protected WebDriver loadWebDriver() {
+    private static WebDriver getWebDriver(File webDriverFile, boolean isShow) {
         // 返回的驱动
         WebDriver result;
         // 火狐设置
