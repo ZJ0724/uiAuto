@@ -1,5 +1,8 @@
 package com.zj0724.uiAuto;
 
+import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
@@ -9,18 +12,36 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  * */
 public enum DriverType {
 
-    CHROME(DesiredCapabilities.chrome()),
+    CHROME(() -> {
+        DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
+        ChromeOptions chromeOptions = new ChromeOptions().merge(desiredCapabilities);
+        chromeOptions.setHeadless(true);
+        chromeOptions.addArguments("--no-sandbox");
+        return chromeOptions;
+    }),
 
-    FIREBOX(DesiredCapabilities.firefox());
+    FIREBOX(() -> {
+        DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();
+        FirefoxOptions firefoxOptions = new FirefoxOptions().merge(desiredCapabilities);
+        firefoxOptions.setHeadless(true);
+        firefoxOptions.addArguments("--no-sandbox");
+        return firefoxOptions;
+    });
 
-    private final DesiredCapabilities desiredCapabilities;
+    private final MutableCapabilities mutableCapabilities;
 
-    DriverType(DesiredCapabilities desiredCapabilities) {
-        this.desiredCapabilities = desiredCapabilities;
+    DriverType(Option option) {
+        this.mutableCapabilities = option.getMutableCapabilities();
     }
 
-    public DesiredCapabilities getDesiredCapabilities() {
-        return desiredCapabilities;
+    public MutableCapabilities getMutableCapabilities() {
+        return mutableCapabilities;
+    }
+
+    private interface Option {
+
+        MutableCapabilities getMutableCapabilities();
+
     }
 
 }

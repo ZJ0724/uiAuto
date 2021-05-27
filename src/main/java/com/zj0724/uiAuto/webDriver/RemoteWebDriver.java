@@ -18,7 +18,8 @@ public final class RemoteWebDriver extends AbstractWebDriver {
 
     private static WebDriver getWebDriver(String url, DriverType driverType) {
         try {
-            return new org.openqa.selenium.remote.RemoteWebDriver(new URL(url), driverType.getDesiredCapabilities());
+            return new org.openqa.selenium.remote.RemoteWebDriver(new URL(url), driverType.getMutableCapabilities());
+
         } catch (Exception e) {
             throw new WebDriverException(e.getMessage());
         }
