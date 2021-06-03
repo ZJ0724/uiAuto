@@ -50,14 +50,10 @@ public final class ChromeWebDriver extends AbstractWebDriver {
         // 设置浏览器最大化
         options.add("start-maximized");
 
-        // windows系统设置headless
-        if (Storage.SYSTEM_OS == SystemOS.WINDOWS) {
-            chromeOptions.setHeadless(!isShow);
-        }
+        chromeOptions.setHeadless(!isShow);
 
-        // linux系统默认设置headless为true，并设置沙盒模式
+        // linux系统设置沙盒模式
         if (Storage.SYSTEM_OS == SystemOS.LINUX) {
-            chromeOptions.setHeadless(true);
             options.add("no-sandbox");
         }
 

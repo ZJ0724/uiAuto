@@ -43,14 +43,10 @@ public final class FirefoxWebDriver extends AbstractWebDriver {
 
         System.setProperty("webdriver.gecko.driver", webDriverFile.getAbsolutePath());
 
-        // windows设置headless
-        if (Storage.SYSTEM_OS == SystemOS.WINDOWS) {
-            firefoxOptions.setHeadless(!isShow);
-        }
+        firefoxOptions.setHeadless(!isShow);
 
-        // linux默认设置headless为true，并开启沙盒
+        // linux开启沙盒
         if (Storage.SYSTEM_OS == SystemOS.LINUX) {
-            firefoxOptions.setHeadless(true);
             options.add("--no-sandbox");
         }
 
