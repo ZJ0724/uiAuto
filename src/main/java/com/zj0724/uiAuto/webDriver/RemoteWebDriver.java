@@ -12,14 +12,17 @@ import java.net.URL;
  * */
 public final class RemoteWebDriver extends AbstractWebDriver {
 
-    public RemoteWebDriver(String url, DriverType driverType) {
-        super(getWebDriver(url, driverType));
+    public RemoteWebDriver(String url, DriverType driverType, boolean isShow) {
+        super(getWebDriver(url, driverType, isShow));
     }
 
-    private static WebDriver getWebDriver(String url, DriverType driverType) {
-        try {
-            return new org.openqa.selenium.remote.RemoteWebDriver(new URL(url), driverType.getMutableCapabilities());
+    public RemoteWebDriver(String url, DriverType driverType) {
+        this(url, driverType, false);
+    }
 
+    private static WebDriver getWebDriver(String url, DriverType driverType, boolean isShow) {
+        try {
+            return new org.openqa.selenium.remote.RemoteWebDriver(new URL(url), driverType.getMutableCapabilities(isShow));
         } catch (Exception e) {
             throw new WebDriverException(e.getMessage());
         }
