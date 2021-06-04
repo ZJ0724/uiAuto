@@ -43,13 +43,9 @@ public final class BaseWebElement implements WebElement {
     @Override
     public void click(boolean waitIsClick) {
         // 不等待点击元素
-        try {
-            if (!waitIsClick) {
-                this.element.click();
-                return;
-            }
-        } catch (Exception e) {
-            throw new WebElementException("元素不能点击");
+        if (!waitIsClick) {
+            click(this.element);
+            return;
         }
 
         // 等待元素可以点击之后点击
@@ -61,7 +57,7 @@ public final class BaseWebElement implements WebElement {
             }
 
             try {
-                this.element.click();
+                click(this.element);
                 break;
             } catch (Exception ignored) {}
         }
@@ -193,6 +189,18 @@ public final class BaseWebElement implements WebElement {
     @Override
     public String getTagName() {
         return this.element.getTagName();
+    }
+
+    private void click(org.openqa.selenium.WebElement webElement) {
+        try {
+            webElement.click();
+        } catch (Exception e) {
+            try {
+                this.event("click");
+            } catch (Exception e1) {
+                throw new WebElementException(e1.getMessage());
+            }
+        }
     }
 
 }
